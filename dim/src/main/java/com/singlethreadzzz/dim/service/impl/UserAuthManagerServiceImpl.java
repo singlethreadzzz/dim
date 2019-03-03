@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.singlethreadzzz.dim.domain.UserRole;
 import com.singlethreadzzz.dim.mapper.UserAuthMapper;
 import com.singlethreadzzz.dim.service.UserAuthManagerService;
+import com.singlethreadzzz.dim.util.UUIDUtils;
 
 @Service
 public class UserAuthManagerServiceImpl implements UserAuthManagerService {
@@ -22,6 +23,7 @@ public class UserAuthManagerServiceImpl implements UserAuthManagerService {
 
 	@Override
 	public void addUserRole(UserRole userRole) {
+		userRole.setRoleId(UUIDUtils.getUUID());
 		this.userAuthMapper.insertUserRole(userRole);
 	}
 

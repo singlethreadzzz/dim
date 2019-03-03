@@ -10,130 +10,126 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.singlethreadzzz.dim.domain.User;
+import com.singlethreadzzz.dim.domain.UserRole;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
-import com.singlethreadzzz.dim.service.UserManagerService;
-import com.singlethreadzzz.dim.util.EncryptUtils;
+import com.singlethreadzzz.dim.service.UserAuthManagerService;
 
 @Controller
 public class UserAuthManagerController {
 	
 	@Autowired
-	private UserManagerService userManagerService;
+	private UserAuthManagerService userAuthManagerService;
 	
-	@GetMapping("/userManager")
+	@GetMapping("/userAuthManager")
 	@ResponseBody
 	public Result getAllUsers () throws Exception  {
 		Result result = new Result();
-		List<User> userList = new ArrayList<User>();
+		List<UserRole> userRoleList = new ArrayList<UserRole>();
 		try {
-			userList = this.userManagerService.getAllUsers();
+			userRoleList = this.userAuthManagerService.getAllUserRoles();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询全部用户信息失败");
+			throw new BeforeJsonException("查询全部角色信息失败");
 		}
 		
 		result.setCode(1);
-		result.setMessage("查询全部用户信息成功");
-		result.setData(userList);
+		result.setMessage("查询全部角色信息成功");
+		result.setData(userRoleList);
 		return result;
 	}
 
 	@RequiresRoles("admin")
-	@PostMapping("/addUser")
+	@PostMapping("/addUserRole")
 	@ResponseBody
-	public Result addUser(User user) throws Exception {
+	public Result addUserRole(UserRole userRole) throws Exception {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
+		UserRole oldUserRole = new UserRole();
 		try {
-			oldUser = this.userManagerService.selectUserByUserAccount(user.getUserAccount());
+			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleName(userRole.getRoleName());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
+			throw new BeforeJsonException("查询角色信息失败");
 		}
 		
-		if(oldUser != null) {
-			throw new BeforeJsonException("用户已存在");
+		if(oldUserRole != null) {
+			throw new BeforeJsonException("角色已存在");
 		}
 		
-		user.setUserPassword(EncryptUtils.shiroSHA256(user.getUserAccount(), user.getUserPassword()));
 		try {
-			this.userManagerService.addUser(user);
+			this.userAuthManagerService.addUserRole(userRole);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("新增用户失败");
+			throw new BeforeJsonException("新增角色失败");
 		}
 		result.setCode(1);
-		result.setMessage("新增用户成功");
+		result.setMessage("新增角色成功");
 		result.setData(null);
 		return result;
 	}
 	
 	@RequiresRoles("admin")
-	@PostMapping("/updateUser")
+	@PostMapping("/updateUserRole")
 	@ResponseBody
-	public Result updateUser(User user) throws Exception {
+	public Result updateUserRole(UserRole userRole) throws Exception {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
+		UserRole oldUserRole = new UserRole();
 		try {
-			oldUser = this.userManagerService.selectUserByUserAccount(user.getUserAccount());
+			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(userRole.getRoleId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
+			throw new BeforeJsonException("查询角色信息失败");
 		}
 		
-		if(oldUser == null) {
-			throw new BeforeJsonException("用户不存在");
+		if(oldUserRole == null) {
+			throw new BeforeJsonException("角色不存在");
 		}
 		
-		oldUser.setUserPassword(EncryptUtils.shiroSHA256(user.getUserAccount(), user.getUserPassword()));
-		oldUser.setUserName(user.getUserName());
-		oldUser.setRoleId(user.getRoleId());
+		oldUserRole.setRoleCnname(userRole.getRoleCnname());
 		
 		try {
-			this.userManagerService.updateUser(oldUser);
+			this.userAuthManagerService.updateUserRole(oldUserRole);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("新增用户失败");
+			throw new BeforeJsonException("新增角色失败");
 		}
 		result.setCode(1);
-		result.setMessage("新增用户成功");
+		result.setMessage("新增角色成功");
 		result.setData(null);
 		return result;
 	}
 	
 	@RequiresRoles("admin")
-	@PostMapping("/deleteUser")
+	@PostMapping("/deleteUserRole")
 	@ResponseBody
-	public Result deleteUser(String userId) throws Exception {
+	public Result deleteUserRole(String roleId) throws Exception {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
+		UserRole oldUserRole = new UserRole();
 		try {
-			oldUser = this.userManagerService.selectUserByUserId(userId);
+			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(roleId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
+			throw new BeforeJsonException("查询角色信息失败");
 		}
 		
-		if(oldUser == null) {
-			throw new BeforeJsonException("用户不存在");
+		if(oldUserRole == null) {
+			throw new BeforeJsonException("角色不存在");
 		}
 		
 		try {
-			this.userManagerService.deleteUser(userId);
+			this.userAuthManagerService.deleteUserRole(roleId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("删除用户失败");
+			throw new BeforeJsonException("删除角色失败");
 		}
 		result.setCode(1);
-		result.setMessage("删除用户成功");
+		result.setMessage("删除角色成功");
 		result.setData(null);
 		return result;
 	}

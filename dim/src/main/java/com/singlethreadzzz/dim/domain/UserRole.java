@@ -7,8 +7,8 @@ public class UserRole implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 5253670983855619566L;
+
 	private String roleId;
 	
 	private String roleName;
