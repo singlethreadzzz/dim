@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<form th:id="addUser" th:action="@{/addUser}" th:object="${managerInfo}"
+			th:method="POST">
+ 			用户名: <input type="text" value="" th:field="*{name}">
+			用户密码: <input type="text" value="" th:field="*{password}">
+			用户昵称: <input type="text" value="" th:field="*{nickname}">
+			<select th:field="*{state}" >
+			    <option value="0" >待激活</option>
+			    <option value="1" >已激活</option>
+			</select> 
+			<input type="submit" value="Submit" />
+			<input type="reset" value="Reset" /> 
+		</form>
+		<h1 th:text="${massage}"></h1>
+	</div>
+</body>
+</html>

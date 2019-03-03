@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div>
+		<h1 th:text="${index}"></h1>
+		<a th:href="@{/logout}">注销</a>
+		<a shiro:hasRole="admin" th:href="@{/managerInfo}">新增用户</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页</title>
+	<link  rel="stylesheet" href="${path}/static/css/bootstrap.min.css"></link>
+	<script type="text/javascript" src="${path}/static/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="${path}/static/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div>
+		<form id="login-form" th:action="@{/login}" th:object="${loginInfo}"
+			method="POST">
+			<input type="text" name="name" value="" th:field="*{name}"></input>
+			<input type="text" name="password" value="" th:field="*{password}"></input>
+			<select th:field="*{isRememberMe}" >
+			    <option th:value="true" >true</option>
+			    <option th:value="false" >false</option>
+			</select>
+			<input type="submit" value="Submit" />
+			<input type="reset" value="Reset" />
+		</form>
+	</div>
+</body>
+</html>

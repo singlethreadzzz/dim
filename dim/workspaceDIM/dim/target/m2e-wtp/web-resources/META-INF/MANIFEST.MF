@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: dim
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 高坂穗乃果
+Implementation-Vendor-Id: com.singlethreadzzz
+Build-Jdk: 1.8.0_131
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/dim
+Created-By: Maven Integration for Eclipse
+
