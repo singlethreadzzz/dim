@@ -3,7 +3,7 @@ package com.singlethreadzzz.dim.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.singlethreadzzz.dim.exception.MyExceptionResolver;
+import com.singlethreadzzz.dim.handler.MyExceptionResolver;
 
 @Configuration
 public class ExceptionConfig {

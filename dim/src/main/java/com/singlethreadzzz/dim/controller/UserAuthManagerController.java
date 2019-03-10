@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.singlethreadzzz.dim.domain.UserRole;
+import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
 import com.singlethreadzzz.dim.service.UserAuthManagerService;
@@ -21,11 +21,11 @@ public class UserAuthManagerController {
 	@Autowired
 	private UserAuthManagerService userAuthManagerService;
 	
-	@GetMapping("/userAuthManager")
+	@GetMapping("/getAllUserRoles")
 	@ResponseBody
-	public Result getAllUsers () throws Exception  {
+	public Result getAllUserRoles () throws Exception  {
 		Result result = new Result();
-		List<UserRole> userRoleList = new ArrayList<UserRole>();
+		List<Role> userRoleList = new ArrayList<Role>();
 		try {
 			userRoleList = this.userAuthManagerService.getAllUserRoles();
 		} catch (Exception e) {
@@ -42,11 +42,11 @@ public class UserAuthManagerController {
 	@RequiresRoles("admin")
 	@PostMapping("/addUserRole")
 	@ResponseBody
-	public Result addUserRole(UserRole userRole) throws Exception {
+	public Result addUserRole(Role userRole) throws Exception {
 		
 		Result result = new Result();
 		
-		UserRole oldUserRole = new UserRole();
+		Role oldUserRole = new Role();
 		try {
 			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleName(userRole.getRoleName());
 		} catch (Exception e) {
@@ -73,11 +73,11 @@ public class UserAuthManagerController {
 	@RequiresRoles("admin")
 	@PostMapping("/updateUserRole")
 	@ResponseBody
-	public Result updateUserRole(UserRole userRole) throws Exception {
+	public Result updateUserRole(Role userRole) throws Exception {
 		
 		Result result = new Result();
 		
-		UserRole oldUserRole = new UserRole();
+		Role oldUserRole = new Role();
 		try {
 			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(userRole.getRoleId());
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class UserAuthManagerController {
 		
 		Result result = new Result();
 		
-		UserRole oldUserRole = new UserRole();
+		Role oldUserRole = new Role();
 		try {
 			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(roleId);
 		} catch (Exception e) {

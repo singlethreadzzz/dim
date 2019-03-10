@@ -14,8 +14,8 @@ import com.singlethreadzzz.dim.interceptor.PathInterceptor;
 //@Configuration
 public class InterceptorsConfig implements WebMvcConfigurer {
 	
-	@Autowired
-	private LoginInterceptor loginInterceptor;
+//	@Autowired
+//	private LoginInterceptor loginInterceptor;
 	@Autowired
 	private PathInterceptor pathInterceptor;
 
@@ -33,16 +33,19 @@ public class InterceptorsConfig implements WebMvcConfigurer {
 //        		.excludePathPatterns(excludePathPatternsList)
 //				.addPathPatterns("/**");
 		
-		List<String> excludePathPatternsList = new ArrayList<String>();
-		excludePathPatternsList.add("/login");
-		excludePathPatternsList.add("/logout");
-		excludePathPatternsList.add("/error/*");
+//		List<String> excludePathPatternsList = new ArrayList<String>();
+//		excludePathPatternsList.add("/login");
+//		excludePathPatternsList.add("/logout");
+//		excludePathPatternsList.add("/error/*");
 		//添加登录径拦截器
-		registry.addInterceptor(loginInterceptor)
-		        .excludePathPatterns(excludePathPatternsList)
-				.addPathPatterns("/**");
+//		registry.addInterceptor(loginInterceptor)
+//		        .excludePathPatterns(excludePathPatternsList)
+//				.addPathPatterns("/**");
 		//添加路径拦截器
+		List<String> excludePathPatternsList = new ArrayList<String>();
+		excludePathPatternsList.add("/dim/static/**");
 		registry.addInterceptor(pathInterceptor)
+				.excludePathPatterns(excludePathPatternsList)
 				.addPathPatterns("/**");
 				
 		

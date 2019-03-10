@@ -2,7 +2,7 @@ package com.singlethreadzzz.dim.domain;
 
 import java.io.Serializable;
 
-public class UserRole implements Serializable{
+public class Role implements Serializable{
 	
 	/**
 	 * 

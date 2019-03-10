@@ -2,22 +2,22 @@ package com.singlethreadzzz.dim.service;
 
 import java.util.List;
 
-import com.singlethreadzzz.dim.domain.UserRole;
+import com.singlethreadzzz.dim.domain.Role;
 
 public interface UserAuthManagerService {
 	
-	public UserRole selectUserRoleByUserId(String userId);
+	public Role selectUserRoleByUserId(String userId);
 	
-	public UserRole selectUserRoleByRoleId(String roleId);
+	public Role selectUserRoleByRoleId(String roleId);
 	
-	public UserRole selectUserRoleByRoleName(String roleName);
+	public Role selectUserRoleByRoleName(String roleName);
 	
-	public void addUserRole(UserRole userRole);
+	public void addUserRole(Role userRole);
 	
-	public void updateUserRole(UserRole userRole);
+	public void updateUserRole(Role userRole);
 	
 	public void deleteUserRole(String roleId);
 	
-	public List<UserRole> getAllUserRoles();
+	public List<Role> getAllUserRoles();
 
 }

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.singlethreadzzz.dim.domain.User;
-import com.singlethreadzzz.dim.domain.UserRole;
+import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.service.UserAuthManagerService;
 import com.singlethreadzzz.dim.service.UserManagerService;
 
@@ -78,7 +78,7 @@ public class AdminRealm extends AuthorizingRealm {
 	@Override
 	public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		User principal = (User)principals.getPrimaryPrincipal();
-		UserRole userRole = this.userAuthManagerService.selectUserRoleByUserId(principal.getUserId());
+		Role userRole = this.userAuthManagerService.selectUserRoleByUserId(principal.getUserId());
 		Set<String> roles = new HashSet<>();
 		if(userRole != null) {
 			roles.add(userRole.getRoleName());

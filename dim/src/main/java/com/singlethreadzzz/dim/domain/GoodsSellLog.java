@@ -22,6 +22,8 @@ public class GoodsSellLog implements Serializable{
 	
 	private String goodsSellRemarks;
 	
+	private String goodsSellMemberId;
+	
 	private String operationUser;
 	
 	private Timestamp operationTime;
@@ -88,6 +90,14 @@ public class GoodsSellLog implements Serializable{
 
 	public void setOperationTime(Timestamp operationTime) {
 		this.operationTime = operationTime;
+	}
+
+	public String getGoodsSellMemberId() {
+		return goodsSellMemberId;
+	}
+
+	public void setGoodsSellMemberId(String goodsSellMemberId) {
+		this.goodsSellMemberId = goodsSellMemberId;
 	}
 	
 }

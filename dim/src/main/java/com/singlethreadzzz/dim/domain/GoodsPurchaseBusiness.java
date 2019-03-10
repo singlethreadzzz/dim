@@ -13,7 +13,7 @@ public class GoodsPurchaseBusiness implements Serializable{
 	
 	private String GoodsPurchaseBusinessName;
 	
-	private String GoodsPurchaseBusinessCellphoneNumber;
+	private String GoodsPurchaseBusinessPhone;
 
 	public String getGoodsPurchaseBusinessId() {
 		return GoodsPurchaseBusinessId;
@@ -31,12 +31,12 @@ public class GoodsPurchaseBusiness implements Serializable{
 		GoodsPurchaseBusinessName = goodsPurchaseBusinessName;
 	}
 
-	public String getGoodsPurchaseBusinessCellphoneNumber() {
-		return GoodsPurchaseBusinessCellphoneNumber;
+	public String getGoodsPurchaseBusinessPhone() {
+		return GoodsPurchaseBusinessPhone;
 	}
 
-	public void setGoodsPurchaseBusinessCellphoneNumber(String goodsPurchaseBusinessCellphoneNumber) {
-		GoodsPurchaseBusinessCellphoneNumber = goodsPurchaseBusinessCellphoneNumber;
+	public void setGoodsPurchaseBusinessPhone(String goodsPurchaseBusinessPhone) {
+		GoodsPurchaseBusinessPhone = goodsPurchaseBusinessPhone;
 	}
-	
+
 }

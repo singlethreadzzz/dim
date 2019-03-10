@@ -14,8 +14,8 @@ public class PageController {
 	public ModelAndView loginPage() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("login");
-		LoginInfo LoginInfo = new LoginInfo();
-		mv.addObject(LoginInfo);
+		LoginInfo loginInfo = new LoginInfo();
+		mv.addObject("loginInfo", loginInfo);
 		return mv;
 	}
 	
@@ -34,12 +34,12 @@ public class PageController {
 		return mv;
 	}
 	
-	@GetMapping("/managerInfo")
+	@GetMapping("/userManager")
 	public ModelAndView managerInfoPage() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("managerInfo");
-		User managerInfo = new User();
-		mv.addObject(managerInfo);
+		mv.setViewName("userManager");
+		User user = new User();
+		mv.addObject(user);
 		return mv;
 	}
 

@@ -22,7 +22,7 @@ public class UserManagerController {
 	@Autowired
 	private UserManagerService userManagerService;
 	
-	@GetMapping("/userManager")
+	@GetMapping("/getAllUsers")
 	@ResponseBody
 	public Result getAllUsers () throws Exception  {
 		Result result = new Result();
