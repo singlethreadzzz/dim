@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.singlethreadzzz.dim.domain.User;
+import com.singlethreadzzz.dim.pojo.UserInfo;
 
 @Repository
 public interface UserMapper {
@@ -43,5 +44,14 @@ public interface UserMapper {
     @ResultMap("User")
 	@Select("select USER_ID,USER_ACCOUNT,USER_NAME,USER_PASSWORD,ROLE_ID from dim_user where USER_ACCOUNT = #{userAccount}")
 	public User selectUserByUserAccount(@Param("userAccount") String userAccount);
+    
+	@Results(id = "UserInfo", value =
+		{ @Result(property = "userId", column = "USER_ID"),
+		  @Result(property = "userAccount", column = "USER_ACCOUNT"), 
+		  @Result(property = "userName", column = "USER_NAME"),
+		  @Result(property = "roleName", column = "ROLE_NAME"),
+		  @Result(property = "roleCnname", column = "ROLE_CNNAME")})
+	@Select("select a.USER_ID,a.USER_ACCOUNT,a.USER_NAME,b.ROLE_NAME,b.ROLE_CNNAME from dim_user a,dim_role b where a.ROLE_ID = b.ROLE_ID and a.USER_ACCOUNT != 'admin'")
+	public List<UserInfo> selectAllUsersInfo();
 
 }

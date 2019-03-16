@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-@Component
+//@Component
 public class PathInterceptor implements HandlerInterceptor {
 	
 	Logger logger = LoggerFactory.getLogger(PathInterceptor.class);
@@ -20,6 +20,7 @@ public class PathInterceptor implements HandlerInterceptor {
 	 */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    	System.out.println(request.getRequestURI());
     	String path = request.getContextPath();
     	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     	modelAndView.addObject("path", path);

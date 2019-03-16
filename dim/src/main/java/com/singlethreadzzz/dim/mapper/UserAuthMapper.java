@@ -44,5 +44,5 @@ public interface UserAuthMapper {
     @ResultMap("Role")
 	@Select("select ROLE_ID,ROLE_NAME,ROLE_CNNAME from dim_role where ROLE_NAME = #{roleName}")
 	public Role selectUserRoleByRoleName(@Param("roleName") String roleName);
-
+    
 }

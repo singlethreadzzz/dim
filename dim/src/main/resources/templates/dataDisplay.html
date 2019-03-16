@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="singlethreadzzz <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系统数据展示页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../static/css/bootstrap.min.css" th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"></link>
+	<link href="../static/css/toastr.min.css" th:href="@{/static/css/toastr.min.css}" rel="stylesheet"></link>
+	<link href="../static/css/main.css" th:href="@{/static/css/main.css}" rel="stylesheet"></link>
+	<script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="../static/js/toastr.min.js" th:src="@{/static/js/toastr.min.js}"></script>
+	<script type="text/javascript" src="../static/js/main.js" th:src="@{/static/js/main.js}"></script>
+
+   	<script type="text/javascript" src="../static/js/dataDisplay/dataDisplay.js" th:src="@{/static/js/dataDisplay/dataDisplay.js}"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html" th:href="@{/index}">首页</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="goodsManage.html" th:href="@{/goodsManage}">商品管理</a></li>
+                        <li class="active"><a href="dataDisplay.html" th:href="@{/dataDisplay}">数据展示</a></li>
+                        <li><a href="userManage.html" th:href="@{/userManage}">用户管理</a></li>
+                        <li><a href="logQuery.html" th:href="@{/logQuery}">日志查询</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                        	<a th:text="${userName}">用户名</a>
+                        </li>
+                        <li>
+                        	<a th:href="@{/logout}">注销</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <h3 class="page-header">数据展示</h3>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h4 class="page-header">当月数据展示</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月销售额top10</h5>
+                    <div id="nowTop"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月净利润top10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月净利润low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h4 class="page-header">上月数据展示</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">上月月销售额top10</h5>
+                    <div id="nowTop"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">上月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">上月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">上月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h4 class="page-header">年度数据展示</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">年度销售额top10</h5>
+                    <div id="nowTop"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">年度销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h5 class="page-header">当月销售额low10</h5>
+                    <div id="nowLow"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <br>
+                <p class="text-muted">Copyright © 2019 singlethreadzzz</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.mapper.UserMapper;
+import com.singlethreadzzz.dim.pojo.UserInfo;
 import com.singlethreadzzz.dim.service.UserManagerService;
 import com.singlethreadzzz.dim.util.UUIDUtils;
 
@@ -36,13 +37,22 @@ public class UserManagerServiceImpl implements UserManagerService{
 	}
 
 	@Override
-	public void deleteUser(String userId) {
-		this.userMapper.deleteUserByUserId(userId);		
+	public void deleteUsers(List<String> userIdList) {
+		userIdList.forEach(x -> {
+			User oldUser = new User();
+			oldUser = this.userMapper.selectUserByUserId(x);
+			this.userMapper.deleteUserByUserId(oldUser.getUserId());
+		});
 	}
 
 	@Override
 	public User selectUserByUserId(String userId) {
 		return this.userMapper.selectUserByUserId(userId);
+	}
+	
+	@Override
+	public List<UserInfo> getAllUsersInfo() {
+		return this.userMapper.selectAllUsersInfo();
 	}
 
 }

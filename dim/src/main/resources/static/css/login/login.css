@@ -1,0 +1,34 @@
+form {
+	margin-top: 50%;
+	background-color: white;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+button {
+	margin: 10px;
+}
+
+span {
+	margin-left: 20px;
+	color: gray;
+}
+
+.background {
+	z-index: 1;
+	background: url("../../images/login.jpg") no-repeat;
+	height: 100%;
+	background-size: cover;
+}
+
+h2 {
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+#errorLabel{
+	color:red;
+}

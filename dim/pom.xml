@@ -84,6 +84,12 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.18</version>
 		</dependency>
+		<!-- springboot热部署 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>false</optional>
+		</dependency>
 	</dependencies>
 
 	<build>

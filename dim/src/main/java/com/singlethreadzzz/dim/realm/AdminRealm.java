@@ -3,6 +3,7 @@ package com.singlethreadzzz.dim.realm;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,8 +18,8 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.domain.Role;
+import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.service.UserAuthManagerService;
 import com.singlethreadzzz.dim.service.UserManagerService;
 
@@ -45,21 +46,16 @@ public class AdminRealm extends AuthorizingRealm {
 		UsernamePasswordToken UPtoken = (UsernamePasswordToken)token;
 		String userAccount = UPtoken.getUsername();	
 		User user = null;
-		try {
-			user = this.userManagerService.selectUserByUserAccount(userAccount);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new UnknownAccountException("查询用户异常");
-		}
+		user = this.userManagerService.selectUserByUserAccount(userAccount);
 		
 		if(user == null) {
-			throw new UnknownAccountException("用户名错误");
+			throw new UnknownAccountException();
 		}
 		
 		String password = user.getUserPassword();
 
 		if(password == null) {
-		    throw new UnknownAccountException("数据库信息有误");
+		    throw new AccountException();
 		}
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, ByteSource.Util.bytes(userAccount + "LoveLive"), getName());

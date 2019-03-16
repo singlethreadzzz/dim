@@ -6,13 +6,17 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
+import com.singlethreadzzz.dim.pojo.UserInfo;
 import com.singlethreadzzz.dim.service.UserManagerService;
 import com.singlethreadzzz.dim.util.EncryptUtils;
 
@@ -39,11 +43,29 @@ public class UserManagerController {
 		result.setData(userList);
 		return result;
 	}
+	
+	@GetMapping("/getAllUsersInfo")
+	@ResponseBody
+	public Result getAllUsersInfo () throws Exception  {
+		Result result = new Result();
+		List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+		try {
+			userInfoList = this.userManagerService.getAllUsersInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BeforeJsonException("查询全部用户信息失败");
+		}
+		
+		result.setCode(1);
+		result.setMessage("查询全部用户信息成功");
+		result.setData(userInfoList);
+		return result;
+	}
 
 	@RequiresRoles("admin")
 	@PostMapping("/addUser")
 	@ResponseBody
-	public Result addUser(User user) throws Exception {
+	public Result addUser(@RequestBody User user) throws Exception {
 		
 		Result result = new Result();
 		
@@ -75,7 +97,7 @@ public class UserManagerController {
 	@RequiresRoles("admin")
 	@PostMapping("/updateUser")
 	@ResponseBody
-	public Result updateUser(User user) throws Exception {
+	public Result updateUser(@RequestBody User user) throws Exception {
 		
 		Result result = new Result();
 		
@@ -99,35 +121,23 @@ public class UserManagerController {
 			this.userManagerService.updateUser(oldUser);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("新增用户失败");
+			throw new BeforeJsonException("修改用户失败");
 		}
 		result.setCode(1);
-		result.setMessage("新增用户成功");
+		result.setMessage("修改用户成功");
 		result.setData(null);
 		return result;
 	}
 	
 	@RequiresRoles("admin")
-	@PostMapping("/deleteUser")
+	@DeleteMapping("/deleteUser")
 	@ResponseBody
-	public Result deleteUser(String userId) throws Exception {
+	public Result deleteUser(@RequestBody List<String> userIdList) throws Exception {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
 		try {
-			oldUser = this.userManagerService.selectUserByUserId(userId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
-		}
-		
-		if(oldUser == null) {
-			throw new BeforeJsonException("用户不存在");
-		}
-		
-		try {
-			this.userManagerService.deleteUser(userId);
+			this.userManagerService.deleteUsers(userIdList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("删除用户失败");
@@ -135,6 +145,24 @@ public class UserManagerController {
 		result.setCode(1);
 		result.setMessage("删除用户成功");
 		result.setData(null);
+		return result;
+	}
+	
+	@GetMapping("/getUserByUserId")
+	@ResponseBody
+	public Result getUserByUserId (@RequestParam String userId) throws Exception  {
+		Result result = new Result();
+		User user = new User();
+		try {
+			user = this.userManagerService.selectUserByUserId(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BeforeJsonException("查询用户信息失败");
+		}
+		
+		result.setCode(1);
+		result.setMessage("查询用户信息成功");
+		result.setData(user);
 		return result;
 	}
 }

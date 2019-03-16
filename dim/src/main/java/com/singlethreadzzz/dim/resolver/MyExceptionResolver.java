@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.handler;
+package com.singlethreadzzz.dim.resolver;
 
 import java.util.Map;
 
@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.exception.BeforePageException;
-import com.singlethreadzzz.dim.pojo.Result;
 
 public class MyExceptionResolver implements HandlerExceptionResolver {
 	
@@ -24,12 +23,10 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 	       	ModelAndView mv = new ModelAndView();
 	        
 	        if(e instanceof BeforeJsonException){
-	        	Result result = new Result();
-	        	result.setCode(0);
-	        	result.setMessage(e.getMessage());
-	        	result.setData(null);
 	        	MappingJackson2JsonView view = new MappingJackson2JsonView();
-	        	mv.addObject("result", result);
+	        	mv.addObject("code", 0);
+	        	mv.addObject("message", e.getMessage());
+	        	mv.addObject("data", null);
 	            mv.setView(view);
 	        }else if(e instanceof BeforePageException){
 	        	mv.addObject("message", e.getMessage());
@@ -41,7 +38,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 	            	});
 	            }
 	        }else {
-	        	mv.setViewName("error500");
+	        	mv.setViewName("500");
 	        }
 	        
 	        return mv;

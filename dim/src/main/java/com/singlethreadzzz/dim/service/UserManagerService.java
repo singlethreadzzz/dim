@@ -3,6 +3,7 @@ package com.singlethreadzzz.dim.service;
 import java.util.List;
 
 import com.singlethreadzzz.dim.domain.User;
+import com.singlethreadzzz.dim.pojo.UserInfo;
 
 public interface UserManagerService {
 	
@@ -14,8 +15,10 @@ public interface UserManagerService {
 	
 	public void updateUser(User user);
 	
-	public void deleteUser(String userId);
+	public void deleteUsers(List<String> userIdList);
 	
 	public List<User> getAllUsers();
+
+	public List<UserInfo> getAllUsersInfo();
 
 }

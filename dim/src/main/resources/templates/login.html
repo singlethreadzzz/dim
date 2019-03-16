@@ -1,25 +1,86 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="UTF-8">
+    <meta name="author" content="singlethreadzzz <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系登录页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>登录页</title>
-	<link  rel="stylesheet" href="static/css/bootstrap.min.css"></link>
-	<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+	<link href="../static/css/bootstrap.min.css" th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"></link>
+	<link href="../static/css/toastr.min.css" th:href="@{/static/css/toastr.min.css}" rel="stylesheet"></link>
+	<link href="../static/css/main.css" th:href="@{/static/css/main.css}" rel="stylesheet"></link>
+	<script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="../static/js/main.js" th:src="@{/static/js/main.js}"></script>
+
+	<link href="../static/css/login/login.css" th:href="@{/static/css/login/login.css}" rel="stylesheet"></link>
+	<script type="text/javascript" src="../static/js/login/login.js" th:src="@{/static/js/login/login.js}"></script>
+	
+	<script th:inline="javascript">
+		var path = [[${#request.getContextPath()}]];
+	</script>
 </head>
+
 <body>
-	<div>
-		<form id="login-form" th:action="@{/login}" th:object="${loginInfo}"
-			method="POST">
-			<input type="text" name="name" value="" th:field="*{name}"></input>
-			<input type="text" name="password" value="" th:field="*{password}"></input>
-			<select th:field="*{isRememberMe}" >
-			    <option th:value="true" >true</option>
-			    <option th:value="false" >false</option>
-			</select>
-			<input type="submit" value="Submit" />
-			<input type="reset" value="Reset" />
-		</form>
+	<div class="background">
+		<header>
+			<nav class="navbar navbar-inverse">
+				<h1 class="text-muted">欢迎使用DIM库存管理系统</h1>
+			</nav>
+		</header>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 col-xs-offset-1 col-sm-offset-1 col-md-offset-4 col-lg-offset-4">
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<h2 class="h3 mb-3 font-weight-normal">请登录</h2>
+						</div>
+						<div class="form-group">
+							<label for="account" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 control-label">用户名</label>
+							<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+								<input type="text" id="account" class="form-control"
+									placeholder="请输入用户名" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 control-label">密码</label>
+							<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+								<input type="password" id="password" class="form-control"
+									placeholder="请输入用户密码" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox mb-3 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
+								<label> <input type="checkbox" value="remember"
+									id="remember"> 记住我
+								</label> <span>不是自己的电脑上不要勾选此项</span>
+							</div>
+						</div>
+						<div class="form-group" style="display: none;" id="errorDiv">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+								<label id="errorLabel"></label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<a id="login" class="btn btn-lg btn-primary btn-block"
+									type="button">登录</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+					<br>
+					<p class="text-muted">Copyright © 2019 singlethreadzzz</p>
+				</div>
+			</div>
+		</footer>
 	</div>
 </body>
+
 </html>

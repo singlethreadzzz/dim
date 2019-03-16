@@ -88,6 +88,7 @@ public class RealmConfig {
         //无需认证的地址   
         map.put("/login","anon");
         map.put("/static/**","anon");
+        map.put("/error","anon");
         //需要权限的地址
 //        map.put("/addUser","roles[admin]");
         

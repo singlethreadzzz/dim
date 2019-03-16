@@ -1,0 +1,6 @@
+$(function () {
+	fnPageLoad();
+});
+function fnPageLoad(){
+
+}
