@@ -2,26 +2,27 @@ $(function () {
 	fnPageLoad();
 });
 function fnPageLoad(){
-	
+	//初始化用户信息table
 	fnInitUserTable();
-	
-	fnInitUserTableCheck();
-	
+	//初始化用户信息table多选框点击事件
+	fnInitUserTableCheckClick();
+	//初始化新增用户点击事件
 	fnInitAddUserClick();
-	
+	//初始化修改用户点击事件
 	fnInitUpdateUserClick();
-	
+	//初始化删除用户点击事件
 	fnInitDeleteUserClick();
-	
+	//初始化选择角色下拉框
 	fnInitRoleNameOption();
-	
+	//初始化用户新增或修改弹出模态框点击事件
 	fnInitSaveOrUpdateClick();
-
 }
 function fnInitUserTable(){
 	
 	var userTable = $("#userTable").DataTable({
-		
+		//显示搜索结果信息
+		info:true,
+		//
 		bFilter: true,
 		autoTidth: false,
 		searching: true,
@@ -56,7 +57,7 @@ function fnInitUserTable(){
 				data: "userId",
 				bSortable: false,
 				render: function(data, type, full, meta) {
-					return "<td><input type='checkbox'  class='checkchild'  value='" + data + "' /></td>";
+					return "<td><input type='checkbox'  id='checkchild'  value='" + data + "' /></td>";
 				}
 			},{
 				cname: "用户帐号",
@@ -88,10 +89,10 @@ function fnInitUserTable(){
 
 }
 
-function fnInitUserTableCheck(){
-	$(".checkall").click(function () {
+function fnInitUserTableCheckClick(){
+	$("#checkall").click(function () {
 	      var check = $(this).prop("checked");
-	      $(".checkchild").prop("checked", check);
+	      $("#checkchild").prop("checked", check);
 	});
 }
 function fnInitAddUserClick(){

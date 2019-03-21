@@ -1,0 +1,14 @@
+<script th:inline="javascript">
+	var path = [[${#request.getContextPath()}]];
+	var userInfo = [[${#userInfo}]];
+	var roleInfo = [[${#roleInfo}]];
+	var active = [[${#active}]];
+	alert(userInfo);
+	$(function () {
+		if(roleInfo.roleName == "staff"){
+			$(".userManage").hide();
+		}
+		$("." + active).addClass("active");
+		alert(JSON.stringify($("." + active)));
+	});
+</script>

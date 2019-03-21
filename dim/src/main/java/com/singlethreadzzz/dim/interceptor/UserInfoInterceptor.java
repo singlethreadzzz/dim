@@ -47,10 +47,9 @@ public class UserInfoInterceptor implements HandlerInterceptor {
 			} catch (Exception e) {
 				throw new BeforePageException("权限查询错误", "500");
 			}
-			modelAndView.addObject("userId", currentUser.getUserId());
-			modelAndView.addObject("userName", currentUser.getUserName());
-			modelAndView.addObject("userAccount", currentUser.getUserAccount());
-			modelAndView.addObject("roleName", role.getRoleName());
+			modelAndView.addObject("userInfo", currentUser);
+			modelAndView.addObject("roleInfo", role);
+			modelAndView.addObject("active", modelAndView.getViewName());
 			logger.info("用户信息成功赋值");
         }
     }

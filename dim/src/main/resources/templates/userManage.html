@@ -6,61 +6,22 @@
     <meta name="description" content="DIM库存管理系统用户管理页">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="../static/css/bootstrap.min.css" th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet"></link>
-	<link href="../static/css/toastr.min.css" th:href="@{/static/css/toastr.min.css}" rel="stylesheet"></link>
-	<link href="../static/css/main.css" th:href="@{/static/css/main.css}" rel="stylesheet"></link>
-	<script type="text/javascript" src="../static/js/jquery-3.3.1.min.js" th:src="@{/static/js/jquery-3.3.1.min.js}"></script>
-	<script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/static/js/bootstrap.min.js}"></script>
-	<script type="text/javascript" src="../static/js/toastr.min.js" th:src="@{/static/js/toastr.min.js}"></script>
-	<script type="text/javascript" src="../static/js/main.js" th:src="@{/static/js/main.js}"></script>
+	<title>用户管理</title>
+	<head th:replace="head"></head>
 
-	<link href="../static/css/dataTables.bootstrap.min.css" th:href="@{/static/css/dataTables.bootstrap.min.css}" rel="stylesheet"></link>
-	<link href="../static/css/userManage/userManage.css" th:href="@{/static/css/userManage/userManage.css}" rel="stylesheet"></link>
+	<link href="../static/css/dataTables.bootstrap4.min.css" th:href="@{/static/css/dataTables.bootstrap4.min.css}" rel="stylesheet"></link>
+	<!-- <link href="../static/css/userManage/userManage.css" th:href="@{/static/css/userManage/userManage.css}" rel="stylesheet"></link> -->
 	<script type="text/javascript" src="../static/js/jquery.dataTables.min.js" th:src="@{/static/js/jquery.dataTables.min.js}"></script>
-    <script type="text/javascript" src="../static/js/dataTables.bootstrap.min.js" th:src="@{/static/js/dataTables.bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../static/js/userManage/userManage.js" th:src="@{/static/js/userManage/userManage.js}"></script>
+    <script type="text/javascript" src="../static/js/dataTables.bootstrap4.min.js" th:src="@{/static/js/dataTables.bootstrap4.min.js}"></script>
     <script type="text/javascript" src="../static/js/constant.js" th:src="@{/static/js/constant.js}"></script>
     
-    <script th:inline="javascript">
-		var path = [[${#request.getContextPath()}]];
-	</script>
+    <script type="text/javascript" src="../static/js/userManage/userManage.js" th:src="@{/static/js/userManage/userManage.js}"></script>
+    
+	<head th:replace="inline"></head>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html" th:href="@{/index}">首页</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="goodsManage.html" th:href="@{/goodsManage}">商品管理</a></li>
-                        <li><a href="dataDisplay.html" th:href="@{/dataDisplay}">数据展示</a></li>
-                        <li class="active"><a href="userManage.html" th:href="@{/userManage}">用户管理</a></li>
-                        <li><a href="logQuery.html" th:href="@{/logQuery}">日志查询</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                        	<a th:text="${userName}">用户名</a>
-                        </li>
-                        <li>
-                        	<a th:href="@{/logout}">注销</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
+	<header th:replace="header"></header>
     <div class="container">
         <div class="stockwarning">
             <div class="row">
@@ -78,15 +39,15 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <table id="userTable" style="width: 100%">
+                    <table id="userTable" style="cellspacing:0;width: 100%">
 						<thead>
 							<tr>
-								<th style="width: 10%;">
-									<input type="checkbox" class="checkall" />
+								<th width="10%">
+									<input type="checkbox" id="checkall" />
 								</th>
-								<th style="width: 30%;">用户帐号</th>
-								<th style="width: 30%;">用户昵称</th>
-								<th style="width: 30%;">用户角色</th>
+								<th width="30%">用户帐号</th>
+								<th width="30%">用户昵称</th>
+								<th width="30%">用户角色</th>
 							</tr>
 						</thead>
 					</table>
