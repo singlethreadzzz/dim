@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.singlethreadzzz.dim.domain.Role;
 
 @Repository
-public interface UserAuthMapper {
+public interface UserAuthManageMapper {
 	
 	@Results(id = "Role", value = 
 		{ @Result(property = "roleId", column = "ROLE_ID"),

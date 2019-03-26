@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
-import com.singlethreadzzz.dim.service.UserAuthManagerService;
+import com.singlethreadzzz.dim.service.UserAuthManageService;
 
 @Controller
-public class UserAuthManagerController {
+public class UserAuthManageController {
 	
 	@Autowired
-	private UserAuthManagerService userAuthManagerService;
+	private UserAuthManageService userAuthManagerService;
 	
 	@GetMapping("/getAllUserRoles")
 	@ResponseBody

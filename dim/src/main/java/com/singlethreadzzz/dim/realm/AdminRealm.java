@@ -20,17 +20,17 @@ import org.springframework.stereotype.Component;
 
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.domain.User;
-import com.singlethreadzzz.dim.service.UserAuthManagerService;
-import com.singlethreadzzz.dim.service.UserManagerService;
+import com.singlethreadzzz.dim.service.UserAuthManageService;
+import com.singlethreadzzz.dim.service.UserManageService;
 
 @Component
 public class AdminRealm extends AuthorizingRealm {
 	
 	@Autowired
-	private UserManagerService userManagerService;
+	private UserManageService userManagerService;
 	
 	@Autowired
-	private UserAuthManagerService userAuthManagerService;
+	private UserAuthManageService userAuthManagerService;
 	
 	/**
 	 * <p>Method ：doGetAuthenticationInfo

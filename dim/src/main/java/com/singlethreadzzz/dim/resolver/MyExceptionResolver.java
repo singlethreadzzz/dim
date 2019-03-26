@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -38,7 +39,8 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 	            	});
 	            }
 	        }else {
-	        	mv.setViewName("500");
+	        	mv.setViewName("error/500");
+	        	mv.setStatus(HttpStatus.valueOf(500));
 	        }
 	        
 	        return mv;

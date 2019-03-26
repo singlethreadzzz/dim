@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.singlethreadzzz.dim.domain.Role;
 
-public interface UserAuthManagerService {
+public interface UserAuthManageService {
 	
 	public Role selectUserRoleByUserId(String userId);
 	

@@ -5,7 +5,7 @@ import java.util.List;
 import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.pojo.UserInfo;
 
-public interface UserManagerService {
+public interface UserManageService {
 	
 	public User selectUserByUserAccount(String userAccount);
 	

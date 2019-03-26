@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.exception.BeforePageException;
-import com.singlethreadzzz.dim.service.UserAuthManagerService;
+import com.singlethreadzzz.dim.service.UserAuthManageService;
 
 @Component
 public class UserInfoInterceptor implements HandlerInterceptor {
 	
 	@Autowired
-	private UserAuthManagerService userAuthManagerService;
+	private UserAuthManageService userAuthManagerService;
 	
 	Logger logger = LoggerFactory.getLogger(UserInfoInterceptor.class);
 
@@ -45,11 +45,11 @@ public class UserInfoInterceptor implements HandlerInterceptor {
 			try {
 				role = this.userAuthManagerService.selectUserRoleByRoleId(currentUser.getRoleId());
 			} catch (Exception e) {
-				throw new BeforePageException("权限查询错误", "500");
+				throw new BeforePageException("权限查询错误", "error/500");
 			}
 			modelAndView.addObject("userInfo", currentUser);
 			modelAndView.addObject("roleInfo", role);
-			modelAndView.addObject("active", modelAndView.getViewName());
+			modelAndView.addObject("active", modelAndView.getViewName().substring(0,modelAndView.getViewName().lastIndexOf("/")));
 			logger.info("用户信息成功赋值");
         }
     }

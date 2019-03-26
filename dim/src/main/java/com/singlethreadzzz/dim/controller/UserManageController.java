@@ -17,14 +17,14 @@ import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
 import com.singlethreadzzz.dim.pojo.UserInfo;
-import com.singlethreadzzz.dim.service.UserManagerService;
+import com.singlethreadzzz.dim.service.UserManageService;
 import com.singlethreadzzz.dim.util.EncryptUtils;
 
 @Controller
-public class UserManagerController {
+public class UserManageController {
 	
 	@Autowired
-	private UserManagerService userManagerService;
+	private UserManageService userManagerService;
 	
 	@GetMapping("/getAllUsers")
 	@ResponseBody

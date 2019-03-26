@@ -16,7 +16,7 @@ import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.pojo.UserInfo;
 
 @Repository
-public interface UserMapper {
+public interface UserManageMapper {
 	
 	@Results(id = "User", value = 
 		{ @Result(property = "userId", column = "USER_ID"), 

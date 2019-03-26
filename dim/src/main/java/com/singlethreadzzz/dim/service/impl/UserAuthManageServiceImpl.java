@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.singlethreadzzz.dim.domain.Role;
-import com.singlethreadzzz.dim.mapper.UserAuthMapper;
-import com.singlethreadzzz.dim.service.UserAuthManagerService;
+import com.singlethreadzzz.dim.mapper.UserAuthManageMapper;
+import com.singlethreadzzz.dim.service.UserAuthManageService;
 import com.singlethreadzzz.dim.util.UUIDUtils;
 
 @Service
-public class UserAuthManagerServiceImpl implements UserAuthManagerService {
+public class UserAuthManageServiceImpl implements UserAuthManageService {
 	
 	@Autowired
-	private UserAuthMapper userAuthMapper;
+	private UserAuthManageMapper userAuthMapper;
 
 	@Override
 	public Role selectUserRoleByUserId(String userId) {

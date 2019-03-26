@@ -3,10 +3,10 @@
 
 <head>
     <meta name="author" content="singlethreadzzz <singlethreadzzz@gmail.com>">
-    <meta name="description" content="DIM库存管理系统商品管理页">
+    <meta name="description" content="DIM库存管理系统销售管理页">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>商品管理</title>
+    <title>销售管理</title>
 	<head th:replace="head"></head>
 	
     <script type="text/javascript" src="../static/js/goodsManage/goodsManage.js" th:src="@{/static/js/goodsManage/goodsManage.js}"></script>
@@ -65,14 +65,7 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                <br>
-                <p class="text-muted">Copyright © 2019 singlethreadzzz</p>
-            </div>
-        </div>
-    </footer>
+	<footer th:replace="footer"> </footer>
     <div class="modal fade" id="purchase" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

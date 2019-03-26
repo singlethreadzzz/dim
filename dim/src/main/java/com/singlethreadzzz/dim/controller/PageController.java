@@ -17,7 +17,7 @@ public class PageController {
 	public ModelAndView loginPage() {
 		logger.info("跳转到登录页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("login");
+		mv.setViewName("login/login");
 		return mv;
 	}
 	
@@ -25,7 +25,7 @@ public class PageController {
 	public ModelAndView indexPage(HttpSession httpSession) {
 		logger.info("跳转到首页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
+		mv.setViewName("index/index");
 		return mv;
 	}
 	
@@ -33,7 +33,7 @@ public class PageController {
 	public ModelAndView errorPage() {
 		logger.info("跳转到错误页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("500");
+		mv.setViewName("error/500");
 		return mv;
 	}
 	
@@ -41,7 +41,7 @@ public class PageController {
 	public ModelAndView goodsManagePage() {
 		logger.info("跳转到商品管理页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("goodsManage");
+		mv.setViewName("goodsManage/goodsManage");
 		return mv;
 	}
 	
@@ -49,7 +49,7 @@ public class PageController {
 	public ModelAndView dataDisplayPage() {
 		logger.info("跳转到数据展示页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("dataDisplay");
+		mv.setViewName("dataDisplay/dataDisplay");
 		return mv;
 	}
 	
@@ -57,7 +57,7 @@ public class PageController {
 	public ModelAndView userManagePage() {
 		logger.info("跳转到用户管理页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("userManage");
+		mv.setViewName("userManage/userManage");
 		return mv;
 	}
 	
@@ -65,7 +65,23 @@ public class PageController {
 	public ModelAndView logQueryPage() {
 		logger.info("跳转到日志查询页");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("logQuery");
+		mv.setViewName("logQuery/logQuery");
+		return mv;
+	}
+	
+	@GetMapping("/salesManage")
+	public ModelAndView salesManage() {
+		logger.info("跳转到销售管理页");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("salesManage/salesManage");
+		return mv;
+	}
+	
+	@GetMapping("/goodsTypeManage")
+	public ModelAndView goodsTypeManage() {
+		logger.info("跳转到商品类型管理页");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("goodsManage/goodsTypeManage");
 		return mv;
 	}
 

@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.singlethreadzzz.dim.domain.User;
-import com.singlethreadzzz.dim.mapper.UserMapper;
+import com.singlethreadzzz.dim.mapper.UserManageMapper;
 import com.singlethreadzzz.dim.pojo.UserInfo;
-import com.singlethreadzzz.dim.service.UserManagerService;
+import com.singlethreadzzz.dim.service.UserManageService;
 import com.singlethreadzzz.dim.util.UUIDUtils;
 
 @Service
-public class UserManagerServiceImpl implements UserManagerService{
+public class UserManageServiceImpl implements UserManageService{
 	
 	@Autowired
-	private UserMapper userMapper;
+	private UserManageMapper userMapper;
 	
 	@Override
 	public List<User> getAllUsers() {

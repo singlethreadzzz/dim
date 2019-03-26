@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="singlethreadzzz <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系统商品管理页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品管理</title>
+	<head th:replace="head"></head>
+	
+    <script type="text/javascript" src="../static/js/goodsManage/goodsTypeManage.js" th:src="@{/static/js/goodsManage/goodsTypeManage.js}"></script>
+    
+    <head th:replace="inline"></head>
+</head>
+
+<body>
+	<header th:replace="header"></header>
+    <div class="container">
+        <div class="stockwarning">
+            <div class="row">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <h3 class="page-header">商品管理</h3>
+                    <a href="goodsManage.html" th:href="@{/goodsManage}" class="btn btn-primary" role="button">商品编辑</a>
+                    <a href="goodsTypeManage.html" th:href="@{/goodsTypeManage}" class="btn btn-primary bottom" role="button">商品类型编辑</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h4 class="page-header">商品类型编辑</h4>
+                    <a id="addGoods" class="btn btn-primary" role="button">新增</a>
+                    <a id="updateGoods" class="btn btn-primary bottom" role="button">修改</a>
+                    <a id="deleteGoods" class="btn btn-primary bottom" role="button">删除</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h4 class="page-header">商品类型信息</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="goodsTypeTable" style="cellspacing:0;width: 100%">
+						<thead>
+							<tr>
+								<th width="10%">
+									<input type="checkbox" id="checkall" />
+								</th>
+								<th width="50%">商品类型编码</th>
+								<th width="50%">商品类型名称</th>
+							</tr>
+						</thead>
+					</table>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer th:replace="footer"> </footer>
+    <div class="modal fade" id="addOrUpdate" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="purchaseModalLabel">进货管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">email@example.com</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="datatime" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="datetime-local" class="form-control" id="datatime" placeholder="datatime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="spinner" class="col-sm-2 control-label">进货数</label>
+                            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">                            
+                                <div class="input-group spinner">
+                                    <input type="text" class="form-control" value="0" id="spinner">
+                                    <div class="input-group-btn-vertical">
+                                        <button class="btn btn-default" type="button"><i
+                                                class="fa fa-caret-up"></i></button>
+                                        <button class="btn btn-default" type="button"><i
+                                                class="fa fa-caret-down"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
