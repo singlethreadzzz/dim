@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.singlethreadzzz.dim.interceptor.UserInfoInterceptor;
 
 @Configuration
-public class MyWebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
 	
 //	@Autowired
 //	private LoginInterceptor loginInterceptor;

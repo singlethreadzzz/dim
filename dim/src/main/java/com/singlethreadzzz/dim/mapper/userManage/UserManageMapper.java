@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.mapper;
+package com.singlethreadzzz.dim.mapper.userManage;
 
 import java.util.List;
 

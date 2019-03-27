@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.controller;
+package com.singlethreadzzz.dim.controller.login;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;

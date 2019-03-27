@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
 
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.domain.User;
-import com.singlethreadzzz.dim.service.UserAuthManageService;
-import com.singlethreadzzz.dim.service.UserManageService;
+import com.singlethreadzzz.dim.service.userManage.UserManageService;
+import com.singlethreadzzz.dim.service.userManage.UserRoleManageService;
 
 @Component
 public class AdminRealm extends AuthorizingRealm {
@@ -30,7 +30,7 @@ public class AdminRealm extends AuthorizingRealm {
 	private UserManageService userManagerService;
 	
 	@Autowired
-	private UserAuthManageService userAuthManagerService;
+	private UserRoleManageService userAuthManagerService;
 	
 	/**
 	 * <p>Method ：doGetAuthenticationInfo
@@ -46,7 +46,12 @@ public class AdminRealm extends AuthorizingRealm {
 		UsernamePasswordToken UPtoken = (UsernamePasswordToken)token;
 		String userAccount = UPtoken.getUsername();	
 		User user = null;
-		user = this.userManagerService.selectUserByUserAccount(userAccount);
+		try {
+			user = this.userManagerService.selectUserByUserAccount(userAccount);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnknownAccountException();
+		}
 		
 		if(user == null) {
 			throw new UnknownAccountException();

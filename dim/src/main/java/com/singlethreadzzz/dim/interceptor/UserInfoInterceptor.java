@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.domain.User;
 import com.singlethreadzzz.dim.exception.BeforePageException;
-import com.singlethreadzzz.dim.service.UserAuthManageService;
+import com.singlethreadzzz.dim.service.userManage.UserRoleManageService;
 
 @Component
 public class UserInfoInterceptor implements HandlerInterceptor {
 	
 	@Autowired
-	private UserAuthManageService userAuthManagerService;
+	private UserRoleManageService userAuthManagerService;
 	
 	Logger logger = LoggerFactory.getLogger(UserInfoInterceptor.class);
 

@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.controller;
+package com.singlethreadzzz.dim.controller.page;
 
 import javax.servlet.http.HttpSession;
 
@@ -70,7 +70,7 @@ public class PageController {
 	}
 	
 	@GetMapping("/salesManage")
-	public ModelAndView salesManage() {
+	public ModelAndView salesManagePage() {
 		logger.info("跳转到销售管理页");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("salesManage/salesManage");
@@ -78,7 +78,7 @@ public class PageController {
 	}
 	
 	@GetMapping("/goodsTypeManage")
-	public ModelAndView goodsTypeManage() {
+	public ModelAndView goodsTypeManagePage() {
 		logger.info("跳转到商品类型管理页");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("goodsManage/goodsTypeManage");

@@ -34,8 +34,8 @@ function fnInitClick(){
 		      success: function (result) {
 		    	  if(result){
 		    		  if(result.code == 0){
+		    			  $('#errorLabel').html(result.message);  
 			    		  $('#errorDiv').show();
-			    		  $('#errorLable').html(result.message);  
 		    		  }else{
 		    			  window.location.href = path +  "/index";
 		    		  }

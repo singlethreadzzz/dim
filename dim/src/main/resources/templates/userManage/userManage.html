@@ -2,19 +2,14 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta name="author" content="singlethreadzzz <singlethreadzzz@gmail.com>">
+    <meta name="author" content="単スレッド <singlethreadzzz@gmail.com>">
     <meta name="description" content="DIM库存管理系统用户管理页">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>用户管理</title>
 	<head th:replace="head"></head>
-
-	<link href="../static/css/dataTables.bootstrap4.min.css" th:href="@{/static/css/dataTables.bootstrap4.min.css}" rel="stylesheet"></link>
-	<!-- <link href="../static/css/userManage/userManage.css" th:href="@{/static/css/userManage/userManage.css}" rel="stylesheet"></link> -->
-	<script type="text/javascript" src="../static/js/jquery.dataTables.min.js" th:src="@{/static/js/jquery.dataTables.min.js}"></script>
-    <script type="text/javascript" src="../static/js/dataTables.bootstrap4.min.js" th:src="@{/static/js/dataTables.bootstrap4.min.js}"></script>
-    <script type="text/javascript" src="../static/js/constant.js" th:src="@{/static/js/constant.js}"></script>
-    
+	
+	<head th:replace="dataTableHead"></head>
     <script type="text/javascript" src="../static/js/userManage/userManage.js" th:src="@{/static/js/userManage/userManage.js}"></script>
     
 	<head th:replace="inline"></head>
@@ -43,7 +38,7 @@
 						<thead>
 							<tr>
 								<th width="10%">
-									<input type="checkbox" id="checkall" />
+									<input type="checkbox" class="checkall" />
 								</th>
 								<th width="30%">用户帐号</th>
 								<th width="30%">用户昵称</th>

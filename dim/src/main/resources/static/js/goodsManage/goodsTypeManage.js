@@ -4,17 +4,15 @@ $(function () {
 function fnPageLoad(){
 	//初始化商品类型信息table
 	fnInitGoodsTypeTable();
-	//初始化用户信息table多选框点击事件
-	fnInitUserTableCheckClick();
-	//初始化新增用户点击事件
-	fnInitAddUserClick();
-	//初始化修改用户点击事件
-	fnInitUpdateUserClick();
-	//初始化删除用户点击事件
-	fnInitDeleteUserClick();
-	//初始化选择角色下拉框
-	fnInitRoleNameOption();
-	//初始化用户新增或修改弹出模态框点击事件
+	//初始化商品类型信息table多选框点击事件
+	fnInitGoodsTypeTableCheckClick();
+	//初始化新增商品类型点击事件
+	fnInitAddGoodsTypeClick();
+	//初始化修改商品类型点击事件
+	fnInitUpdateGoodsTypeClick();
+	//初始化删除商品类型点击事件
+	fnInitDeleteGoodsTypeClick();
+	//初始化商品类型新增或修改弹出模态框点击事件
 	fnInitSaveOrUpdateClick();
 }
 function fnInitGoodsTypeTable(){
@@ -29,8 +27,11 @@ function fnInitGoodsTypeTable(){
 		iDisplayLength: 10,
 		bLengthChange: true,
 		language: constant.dataTablesLanguage,
+		ordering: true,
+		order: [[ 1, 'asc' ]],
+		bServerSide: false,
 		ajax: {
-			url: path + "/getAllGoodsTypeInfo",
+			url: path + "/goodsManage/getAllGoodsTypeInfo",
 			type: "GET",
 			dataSrc: function(result) {
 				var code = result.code;
@@ -44,8 +45,6 @@ function fnInitGoodsTypeTable(){
 				toastr.error("获取全部商品类型信息异常");
 			}
 		},
-		ordering: true,
-		bServerSide: false,
 		drawCallback: function(settings) {
 			
 		},
@@ -53,24 +52,24 @@ function fnInitGoodsTypeTable(){
 			{
 				cname: "",
 				sWidth: "20%",
-				data: "userId",
-				bSortable: false,
+				data: "goodsTypeId",
+				orderable: false,
 				render: function(data, type, full, meta) {
-					return "<td><input type='checkbox'  id='checkchild'  value='" + data + "' /></td>";
+					return "<td><input type='checkbox'  class='checkchild'  value='" + data + "' /></td>";
 				}
 			},{
-				cname: "用户帐号",
+				cname: "商品类型编码",
 				sWidth: "40%",
-				data: "userAccount",
-				bSortable: true,
+				data: "goodsTypeCode",
+				orderable: true,
 				render: function(data, type, full, meta) {
 					return "<td title='" + data + "'>" + data + "</td>";
 				}
 			},{
-				cname: "用户名",
+				cname: "商品类型名称",
 				sWidth: "40%",
-				data: "userName",
-				bSortable: false,
+				data: "goodsTypeName",
+				orderable: false,
 				render: function(data, type, full, meta) {
 					return "<td title='" + data + "'>" + data + "</td>";
 				}
@@ -80,194 +79,163 @@ function fnInitGoodsTypeTable(){
 
 }
 
-function fnInitUserTableCheckClick(){
-	$("#checkall").click(function () {
+function fnInitGoodsTypeTableCheckClick(){
+	$(".checkall").click(function () {
 	      var check = $(this).prop("checked");
-	      $("#checkchild").prop("checked", check);
+	      $(".checkchild").prop("checked", check);
 	});
 }
-function fnInitAddUserClick(){
-	$("#addUser").click(function() {
-		$("#userForm")[0].reset();
-		$("#userAccount").attr('readonly', false);
-		$("#userEdit").modal();
+function fnInitAddGoodsTypeClick(){
+	$("#addGoodsType").click(function() {
+		$("#goodsTypeForm")[0].reset();
+		$("#goodsTypeEdit").modal();
 	});
 }
-function fnInitUpdateUserClick(){
-	$("#updateUser").click(function() {
+function fnInitUpdateGoodsTypeClick(){
+	$("#updateGoodsType").click(function() {
 		 if ($(".checkchild:checked").length == 0) {
-			toastr.warning("请选择要修改的用户");
+			toastr.warning("请选择要修改的商品类型");
 			return;
 		} else if ($(".checkchild:checked").length > 1) {
-			toastr.warning("每次只能修改一个用户");
+			toastr.warning("每次只能修改一个商品类型");
 			return;
 		}
-		var userId = $(".checkchild:checked").attr("value");
-		$("#userId").val(userId);
+		var goodsTypeId = $(".checkchild:checked").attr("value");
+		$("#goodsTypeId").val(goodsTypeId);
 		$.ajax({
 		      type: "GET",
-		      url: path + "/getUserByUserId",
+		      url: path + "/goodsManage/getGoodsTypeInfoByGoodsTypeId",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: {
-		    	  userId: userId
+		    	  goodsTypeId: goodsTypeId
 		      },
 		      success: function (result) {
 		    	  if(result){
 		    		  if(result.code == 1){
-		    				$("#userAccount").val(result.data.userAccount);
-		    				$("#userAccount").attr('readonly', true);
-		    				$("#userName").val(result.data.userName);
-		    				$('#userPassword').val("");
-		    				$("#roleName").val(result.data.roleId);
-		    				$("#userEdit").modal();
+		    				$("#goodsTypeCode").val(result.data.goodsTypeCode);
+		    				$("#goodsTypeName").val(result.data.goodsTypeName);
+		    				$("#goodsTypeEdit").modal();
 		    		  }else{
 		    			  toastr.error(result.message);
 		    		  }
 		    	  }
 			  },
 		      error: function (e) {
-		    	  toastr.error("查询用户失败，请联系管理员");
+		    	  toastr.error("查询商品类型失败，请联系管理员");
 			  }
 		  });
 	});
 }
-function fnInitDeleteUserClick(){
-	$("#deleteUser").click(function () {
-		 var userIdList = new Array();
+function fnInitDeleteGoodsTypeClick(){
+	$("#deleteGoodsType").click(function () {
+		 var goodsTypeIdList = new Array();
 		 if($(".checkchild:checked").length == 0){
-			 toastr.warning("请选择要删除的用户");
+			 toastr.warning("请选择要删除的商品类型");
 			 return;
 		 }
 		 $(".checkchild:checked").each(function(){
-			 userIdList.push($(this).attr("value"));
+			 goodsTypeIdList.push($(this).attr("value"));
 		  });
 		$.ajax({
 		      type: "DELETE",
-		      url: path + "/deleteUser",
+		      url: path + "/goodsManage/deleteGoodsTypeByGoodsTypeId",
 		      dataType: "json",
 		      contentType: 'application/json',
-		      data: JSON.stringify(userIdList),
+		      data: JSON.stringify(goodsTypeIdList),
 		      success: function (result) {
 		    	  if(result){
 		    		  if(result.code == 1){
 		    			  toastr.success(result.message);
-		    			  $("#userTable").DataTable().ajax.reload();
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }else{
 		    			  toastr.error(result.message);
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }
 		    	  }
 			  },
 		      error: function (e) {
-		    	  toastr.error("删除用户失败，请联系管理员");
+		    	  toastr.error("删除商品类型失败，请联系管理员");
 			  }
 		  });
 	});
-}
-function fnInitRoleNameOption() {
-	$.ajax({
-	      type: "GET",
-	      url: path + "/getAllUserRoles",
-	      dataType: "json",
-	      success: function (result) {
-	    	  if(result){
-	    		  if(result.code == 1){
-	    			  $.each(result.data, function (index, val) {
-	    				  var option = "<option value=" + val.roleId + ">" + val.roleCnname + "</option>"
-	    				  $("#roleName").append(option);
-	    			  });
-	    		  }else{
-	    			  toastr.error(result.message);
-	    		  }
-	    	  }
-		  },
-	      error: function (e) {
-	    	  toastr.error("获取角色信息失败，请联系管理员");
-		  }
-	  });
 }
 function fnInitSaveOrUpdateClick() {
 
 	$("#saveOrUpdate").click(function() {
-		var userAccount = $("#userAccount").val();
-		if(!userAccount || $.trim(userAccount) == ""){
-			$("#errorLabel").html("请填写用户帐号");
+		var goodsTypeCode = $("#goodsTypeCode").val();
+		if(!goodsTypeCode || $.trim(goodsTypeCode) == ""){
+			$("#errorLabel").html("请填写商品类型编码");
 			$("#errorDiv").show();
 			return;
 		}
-		var userName = $("#userName").val();
-		if(!userName || $.trim(userName) == ""){
-			$("#errorLabel").html("请填写用户昵称");
+		var goodsTypeName = $("#goodsTypeName").val();
+		if(!goodsTypeName || $.trim(goodsTypeName) == ""){
+			$("#errorLabel").html("请填写商品类型名称");
 			$("#errorDiv").show();
 			return;
 		}
-		var userPassword = $('#userPassword').val();
-		if(!userPassword || $.trim(userPassword) == ""){
-			$("#errorLabel").html("请填写密码");
-			$("#errorDiv").show();
-			return;
-		}
-		var roleId = $("#roleName").val();
-		var userId = $("#userId").val();
-		var user = {};
-		user.userAccount = userAccount;
-		user.userName = userName;
-		user.userPassword = userPassword;
-		user.roleId = roleId;
-		if(userId && userId != ""){
-			user.userId = userId;
-			fnUpdateUser(user);
+		var goodsTypeId = $("#goodsTypeId").val();
+		var goodsTypeCode = $("#goodsTypeCode").val();
+		var goodsTypeName = $("#goodsTypeName").val();
+		var goodsType = {};
+		goodsType.goodsTypeCode = goodsTypeCode;
+		goodsType.goodsTypeName = goodsTypeName;
+		if(goodsTypeId && goodsTypeId != ""){
+			goodsType.goodsTypeId = goodsTypeId;
+			fnUpdateGoodsType(goodsType);
 		}else{
-			fnAddUser(user);
+			fnAddGoodsType(goodsType);
 		}
 	});
-	function fnAddUser(user) {
-		
+	function fnAddGoodsType(goodsType) {
 
 		$.ajax({
 		      type: "POST",
-		      url: path + "/addUser",
+		      url: path + "/goodsManage/saveGoodsType",
 		      dataType: "json",
 		      contentType: 'application/json',
-		      data: JSON.stringify(user),
+		      data: JSON.stringify(goodsType),
 		      success: function (result) {
 		    	  if(result){
 		    		  if(result.code == 1){
 		    			  toastr.success(result.message);
-		    			  $("#userEdit").modal("hide");
-		    			  $("#userTable").DataTable().ajax.reload();
+		    			  $("#goodsTypeEdit").modal("hide");
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }else{
 		    			  toastr.error(result.message);
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }
 		    	  }
 			  },
 		      error: function (e) {
-		    	  toastr.error("新增用户失败，请联系管理员");
+		    	  toastr.error("新增商品类型，请联系管理员");
 			  }
 		  });
 
 	}
-	function fnUpdateUser(user) {
+	function fnUpdateGoodsType(goodsType) {
 
 		$.ajax({
 		      type: "POST",
-		      url: path + "/updateUser",
+		      url: path + "/goodsManage/updateGoodsType",
 		      dataType: "json",
 		      contentType: 'application/json',
-		      data: JSON.stringify(user),
+		      data: JSON.stringify(goodsType),
 		      success: function (result) {
 		    	  if(result){
 		    		  if(result.code == 1){
 		    			  toastr.success(result.message);
-		    			  $("#userEdit").modal("hide");
-		    			  $("#userTable").DataTable().ajax.reload();
+		    			  $("#goodsTypeEdit").modal("hide");
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }else{
 		    			  toastr.error(result.message);
+		    			  $("#goodsTypeTable").DataTable().ajax.reload();
 		    		  }
 		    	  }
 			  },
 		      error: function (e) {
-		    	  toastr.error("新增用户失败，请联系管理员");
+		    	  toastr.error("修改商品类型失败，请联系管理员");
 			  }
 		  });
 	}

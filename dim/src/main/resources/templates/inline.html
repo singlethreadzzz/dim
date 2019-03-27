@@ -4,10 +4,12 @@
 		var userInfo = [[${userInfo}]];
 		var roleInfo = [[${roleInfo}]];
 		var active = [[${active}]];
-		if(roleInfo.roleName == "staff"){
-			$(".dataDisplay").hide();
-			$(".userManage").hide();
-			$(".logQuery").hide();
+		if(roleInfo){
+			if(roleInfo.roleName == "staff"){
+				$(".dataDisplay").hide();
+				$(".userManage").hide();
+				$(".logQuery").hide();
+			}
 		}
 		$("." + active).addClass("active");
 	});

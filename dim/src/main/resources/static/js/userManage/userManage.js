@@ -57,7 +57,7 @@ function fnInitUserTable(){
 				data: "userId",
 				bSortable: false,
 				render: function(data, type, full, meta) {
-					return "<td><input type='checkbox'  id='checkchild'  value='" + data + "' /></td>";
+					return "<td><input type='checkbox'  class='checkchild'  value='" + data + "' /></td>";
 				}
 			},{
 				cname: "用户帐号",
@@ -90,9 +90,9 @@ function fnInitUserTable(){
 }
 
 function fnInitUserTableCheckClick(){
-	$("#checkall").click(function () {
+	$(".checkall").click(function () {
 	      var check = $(this).prop("checked");
-	      $("#checkchild").prop("checked", check);
+	      $(".checkchild").prop("checked", check);
 	});
 }
 function fnInitAddUserClick(){
@@ -164,6 +164,7 @@ function fnInitDeleteUserClick(){
 		    			  $("#userTable").DataTable().ajax.reload();
 		    		  }else{
 		    			  toastr.error(result.message);
+		    			  $("#userTable").DataTable().ajax.reload();
 		    		  }
 		    	  }
 			  },
@@ -276,7 +277,7 @@ function fnInitSaveOrUpdateClick() {
 		    	  }
 			  },
 		      error: function (e) {
-		    	  toastr.error("新增用户失败，请联系管理员");
+		    	  toastr.error("修改用户失败，请联系管理员");
 			  }
 		  });
 	}

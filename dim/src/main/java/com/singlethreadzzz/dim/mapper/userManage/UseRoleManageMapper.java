@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.mapper;
+package com.singlethreadzzz.dim.mapper.userManage;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.singlethreadzzz.dim.domain.Role;
 
 @Repository
-public interface UserAuthManageMapper {
+public interface UseRoleManageMapper {
 	
 	@Results(id = "Role", value = 
 		{ @Result(property = "roleId", column = "ROLE_ID"),

@@ -1,10 +1,10 @@
-package com.singlethreadzzz.dim.service;
+package com.singlethreadzzz.dim.service.userManage;
 
 import java.util.List;
 
 import com.singlethreadzzz.dim.domain.Role;
 
-public interface UserAuthManageService {
+public interface UserRoleManageService {
 	
 	public Role selectUserRoleByUserId(String userId);
 	

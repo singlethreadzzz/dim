@@ -19,7 +19,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception e) {
 		
-		    e.printStackTrace();
+			e.printStackTrace();
 		
 	       	ModelAndView mv = new ModelAndView();
 	        

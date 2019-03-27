@@ -1,4 +1,4 @@
-package com.singlethreadzzz.dim.controller;
+package com.singlethreadzzz.dim.controller.userManage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.singlethreadzzz.dim.domain.Role;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
-import com.singlethreadzzz.dim.service.UserAuthManageService;
+import com.singlethreadzzz.dim.service.userManage.UserRoleManageService;
 
 @Controller
-public class UserAuthManageController {
+@RequestMapping("/userRoleManage")
+public class UserRoleManageController {
 	
 	@Autowired
-	private UserAuthManageService userAuthManagerService;
+	private UserRoleManageService userAuthManagerService;
 	
 	@GetMapping("/getAllUserRoles")
 	@ResponseBody
