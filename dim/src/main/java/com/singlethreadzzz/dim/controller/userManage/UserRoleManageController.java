@@ -17,11 +17,11 @@ import com.singlethreadzzz.dim.pojo.Result;
 import com.singlethreadzzz.dim.service.userManage.UserRoleManageService;
 
 @Controller
-@RequestMapping("/userRoleManage")
+@RequestMapping("/userManage")
 public class UserRoleManageController {
 	
 	@Autowired
-	private UserRoleManageService userAuthManagerService;
+	private UserRoleManageService userRoleManageService;
 	
 	@GetMapping("/getAllUserRoles")
 	@ResponseBody
@@ -29,7 +29,7 @@ public class UserRoleManageController {
 		Result result = new Result();
 		List<Role> userRoleList = new ArrayList<Role>();
 		try {
-			userRoleList = this.userAuthManagerService.getAllUserRoles();
+			userRoleList = this.userRoleManageService.getAllUserRoles();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("查询全部角色信息失败");
@@ -48,20 +48,10 @@ public class UserRoleManageController {
 		
 		Result result = new Result();
 		
-		Role oldUserRole = new Role();
 		try {
-			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleName(userRole.getRoleName());
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("查询角色信息失败");
-		}
-		
-		if(oldUserRole != null) {
-			throw new BeforeJsonException("角色已存在");
-		}
-		
-		try {
-			this.userAuthManagerService.addUserRole(userRole);
+			this.userRoleManageService.addUserRole(userRole);
+		}catch (BeforeJsonException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("新增角色失败");
@@ -79,28 +69,16 @@ public class UserRoleManageController {
 		
 		Result result = new Result();
 		
-		Role oldUserRole = new Role();
 		try {
-			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(userRole.getRoleId());
+			this.userRoleManageService.updateUserRole(userRole);
+		}catch (BeforeJsonException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询角色信息失败");
-		}
-		
-		if(oldUserRole == null) {
-			throw new BeforeJsonException("角色不存在");
-		}
-		
-		oldUserRole.setRoleCnname(userRole.getRoleCnname());
-		
-		try {
-			this.userAuthManagerService.updateUserRole(oldUserRole);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("新增角色失败");
+			throw new BeforeJsonException("修改角色失败");
 		}
 		result.setCode(1);
-		result.setMessage("新增角色成功");
+		result.setMessage("修改角色成功");
 		result.setData(null);
 		return result;
 	}
@@ -108,24 +86,14 @@ public class UserRoleManageController {
 	@RequiresRoles("admin")
 	@PostMapping("/deleteUserRole")
 	@ResponseBody
-	public Result deleteUserRole(String roleId) throws Exception {
+	public Result deleteUserRole(List<String> roleIdList) throws Exception {
 		
 		Result result = new Result();
 		
-		Role oldUserRole = new Role();
 		try {
-			oldUserRole = this.userAuthManagerService.selectUserRoleByRoleId(roleId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("查询角色信息失败");
-		}
-		
-		if(oldUserRole == null) {
-			throw new BeforeJsonException("角色不存在");
-		}
-		
-		try {
-			this.userAuthManagerService.deleteUserRole(roleId);
+			this.userRoleManageService.deleteUserRole(roleIdList);
+		}catch (BeforeJsonException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("删除角色失败");

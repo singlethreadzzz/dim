@@ -7,9 +7,9 @@ import com.singlethreadzzz.dim.pojo.UserInfo;
 
 public interface UserManageService {
 	
-	public User selectUserByUserAccount(String userAccount) throws Exception;
+	public User getUserByUserAccount(String userAccount) throws Exception;
 	
-	public User selectUserByUserId (String userId) throws Exception;
+	public User getUserByUserId (String userId) throws Exception;
 	
 	public void addUser(User user) throws Exception;
 	

@@ -30,8 +30,11 @@ function fnInitUserTable(){
 		iDisplayLength: 10,
 		bLengthChange: true,
 		language: constant.dataTablesLanguage,
+		ordering: true,
+		order: [[ 1, 'asc' ]],
+		bServerSide: false,
 		ajax: {
-			url: path + "/getAllUsersInfo",
+			url: path + "/userManage/getAllUsersInfo",
 			type: "GET",
 			dataSrc: function(result) {
 				var code = result.code;
@@ -45,8 +48,6 @@ function fnInitUserTable(){
 				toastr.error("获取全部用户信息异常");
 			}
 		},
-		ordering: true,
-		bServerSide: false,
 		drawCallback: function(settings) {
 			
 		},
@@ -115,7 +116,7 @@ function fnInitUpdateUserClick(){
 		$("#userId").val(userId);
 		$.ajax({
 		      type: "GET",
-		      url: path + "/getUserByUserId",
+		      url: path + "/userManage/getUserByUserId",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: {
@@ -153,7 +154,7 @@ function fnInitDeleteUserClick(){
 		  });
 		$.ajax({
 		      type: "DELETE",
-		      url: path + "/deleteUser",
+		      url: path + "/userManage/deleteUser",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: JSON.stringify(userIdList),
@@ -177,7 +178,7 @@ function fnInitDeleteUserClick(){
 function fnInitRoleNameOption() {
 	$.ajax({
 	      type: "GET",
-	      url: path + "/getAllUserRoles",
+	      url: path + "/userManage/getAllUserRoles",
 	      dataType: "json",
 	      success: function (result) {
 	    	  if(result){
@@ -236,7 +237,7 @@ function fnInitSaveOrUpdateClick() {
 
 		$.ajax({
 		      type: "POST",
-		      url: path + "/addUser",
+		      url: path + "/userManage/addUser",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: JSON.stringify(user),
@@ -261,7 +262,7 @@ function fnInitSaveOrUpdateClick() {
 
 		$.ajax({
 		      type: "POST",
-		      url: path + "/updateUser",
+		      url: path + "/userManage/updateUser",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: JSON.stringify(user),

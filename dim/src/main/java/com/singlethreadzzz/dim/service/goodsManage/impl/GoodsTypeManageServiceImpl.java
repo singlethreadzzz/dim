@@ -77,7 +77,7 @@ public class GoodsTypeManageServiceImpl implements GoodsTypeManageService{
 		oldGoodsType.setGoodsTypeCode(goodsType.getGoodsTypeCode());
 		oldGoodsType.setGoodsTypeName(goodsType.getGoodsTypeName());
 		
-		this.goodsTypeManageMapper.updateGoodsType(goodsType);
+		this.goodsTypeManageMapper.updateGoodsType(oldGoodsType);
 	}
 
 	@Override

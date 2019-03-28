@@ -19,7 +19,6 @@ import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
 import com.singlethreadzzz.dim.pojo.UserInfo;
 import com.singlethreadzzz.dim.service.userManage.UserManageService;
-import com.singlethreadzzz.dim.util.EncryptUtils;
 
 @Controller
 @RequestMapping("/userManage")
@@ -71,21 +70,10 @@ public class UserManageController {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
-		try {
-			oldUser = this.userManagerService.selectUserByUserAccount(user.getUserAccount());
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
-		}
-		
-		if(oldUser != null) {
-			throw new BeforeJsonException("用户已存在");
-		}
-		
-		user.setUserPassword(EncryptUtils.shiroSHA256(user.getUserAccount(), user.getUserPassword()));
 		try {
 			this.userManagerService.addUser(user);
+		}catch (BeforeJsonException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("新增用户失败");
@@ -103,24 +91,10 @@ public class UserManageController {
 		
 		Result result = new Result();
 		
-		User oldUser = new User();
 		try {
-			oldUser = this.userManagerService.selectUserByUserAccount(user.getUserAccount());
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new BeforeJsonException("查询用户信息失败");
-		}
-		
-		if(oldUser == null) {
-			throw new BeforeJsonException("用户不存在");
-		}
-		
-		oldUser.setUserPassword(EncryptUtils.shiroSHA256(user.getUserAccount(), user.getUserPassword()));
-		oldUser.setUserName(user.getUserName());
-		oldUser.setRoleId(user.getRoleId());
-		
-		try {
-			this.userManagerService.updateUser(oldUser);
+			this.userManagerService.updateUser(user);
+		}catch (BeforeJsonException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("修改用户失败");
@@ -156,7 +130,7 @@ public class UserManageController {
 		Result result = new Result();
 		User user = new User();
 		try {
-			user = this.userManagerService.selectUserByUserId(userId);
+			user = this.userManagerService.getUserByUserId(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BeforeJsonException("查询用户信息失败");

@@ -47,7 +47,7 @@ public class AdminRealm extends AuthorizingRealm {
 		String userAccount = UPtoken.getUsername();	
 		User user = null;
 		try {
-			user = this.userManagerService.selectUserByUserAccount(userAccount);
+			user = this.userManagerService.getUserByUserAccount(userAccount);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UnknownAccountException();
@@ -77,9 +77,15 @@ public class AdminRealm extends AuthorizingRealm {
 	 * @see org.apache.shiro.realm.AuthorizingRealm#doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)
 	 */
 	@Override
-	public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+	public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals)  throws AuthenticationException {
 		User principal = (User)principals.getPrimaryPrincipal();
-		Role userRole = this.userAuthManagerService.selectUserRoleByUserId(principal.getUserId());
+		Role userRole = null;
+		try {
+			userRole = this.userAuthManagerService.getUserRoleByUserId(principal.getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnknownAccountException();
+		}
 		Set<String> roles = new HashSet<>();
 		if(userRole != null) {
 			roles.add(userRole.getRoleName());

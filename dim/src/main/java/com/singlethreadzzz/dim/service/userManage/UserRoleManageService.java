@@ -6,18 +6,18 @@ import com.singlethreadzzz.dim.domain.Role;
 
 public interface UserRoleManageService {
 	
-	public Role selectUserRoleByUserId(String userId);
+	public Role getUserRoleByUserId(String userId) throws Exception;
 	
-	public Role selectUserRoleByRoleId(String roleId);
+	public Role getUserRoleByRoleId(String roleId) throws Exception;
 	
-	public Role selectUserRoleByRoleName(String roleName);
+	public Role getUserRoleByRoleName(String roleName) throws Exception;
 	
-	public void addUserRole(Role userRole);
+	public void addUserRole(Role userRole) throws Exception;
 	
-	public void updateUserRole(Role userRole);
+	public void updateUserRole(Role userRole) throws Exception;
 	
-	public void deleteUserRole(String roleId);
+	public void deleteUserRole(List<String> roleIdList) throws Exception;
 	
-	public List<Role> getAllUserRoles();
+	public List<Role> getAllUserRoles() throws Exception;
 
 }

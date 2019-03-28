@@ -43,7 +43,7 @@ public class UserInfoInterceptor implements HandlerInterceptor {
 			User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
 			Role role = new Role();
 			try {
-				role = this.userAuthManagerService.selectUserRoleByRoleId(currentUser.getRoleId());
+				role = this.userAuthManagerService.getUserRoleByRoleId(currentUser.getRoleId());
 			} catch (Exception e) {
 				throw new BeforePageException("权限查询错误", "error/500");
 			}
