@@ -31,7 +31,7 @@ function fnInitGoodsTypeTable(){
 		order: [[ 1, 'asc' ]],
 		bServerSide: false,
 		ajax: {
-			url: path + "/goodsManage/getAllGoodsTypeInfo",
+			url: path + "/goodsManage/getAllGoodsType",
 			type: "GET",
 			dataSrc: function(result) {
 				var code = result.code;
@@ -89,6 +89,7 @@ function fnInitAddGoodsTypeClick(){
 	$("#addGoodsType").click(function() {
 		$("#goodsTypeForm")[0].reset();
 		$("#goodsTypeEdit").modal();
+		$("#goodsTypeCode").attr('readonly', false);
 	});
 }
 function fnInitUpdateGoodsTypeClick(){
@@ -104,7 +105,7 @@ function fnInitUpdateGoodsTypeClick(){
 		$("#goodsTypeId").val(goodsTypeId);
 		$.ajax({
 		      type: "GET",
-		      url: path + "/goodsManage/getGoodsTypeInfoByGoodsTypeId",
+		      url: path + "/goodsManage/getGoodsTypeByGoodsTypeId",
 		      dataType: "json",
 		      contentType: 'application/json',
 		      data: {
@@ -114,6 +115,7 @@ function fnInitUpdateGoodsTypeClick(){
 		    	  if(result){
 		    		  if(result.code == 1){
 		    				$("#goodsTypeCode").val(result.data.goodsTypeCode);
+		    				$("#goodsTypeCode").attr('readonly', true);
 		    				$("#goodsTypeName").val(result.data.goodsTypeName);
 		    				$("#goodsTypeEdit").modal();
 		    		  }else{
@@ -176,8 +178,6 @@ function fnInitSaveOrUpdateClick() {
 			return;
 		}
 		var goodsTypeId = $("#goodsTypeId").val();
-		var goodsTypeCode = $("#goodsTypeCode").val();
-		var goodsTypeName = $("#goodsTypeName").val();
 		var goodsType = {};
 		goodsType.goodsTypeCode = goodsTypeCode;
 		goodsType.goodsTypeName = goodsTypeName;

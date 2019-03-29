@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.singlethreadzzz.dim.domain.GoodsType;
+import com.singlethreadzzz.dim.domain.Goods;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
+import com.singlethreadzzz.dim.pojo.GoodsInfo;
 import com.singlethreadzzz.dim.pojo.Result;
-import com.singlethreadzzz.dim.service.goodsManage.GoodsTypeManageService;
+import com.singlethreadzzz.dim.service.goodsManage.GoodsManageService;
 
 /**
- * <p>Class       : com.singlethreadzzz.dim.controller.goodsManage.GoodsTypeManageController
- * <p>Descdription: 商品类型管理控制器
+ * <p>Class       : com.singlethreadzzz.dim.controller.goodsManage.GoodsManageController
+ * <p>Descdription: 商品管理控制器
  *
  * @author  単スレッド-singlethreadzzz@gmail.com
  * @version 1.0.0
@@ -33,14 +34,14 @@ import com.singlethreadzzz.dim.service.goodsManage.GoodsTypeManageService;
  */
 @Controller
 @RequestMapping("/goodsManage")
-public class GoodsTypeManageController {
+public class GoodsManageController {
 	
 	@Autowired
-	private GoodsTypeManageService goodsManageService;
+	private GoodsManageService goodsManageService;
 	
 	/**
-	 * <p>Method ：getAllGoodsType
-	 * <p>Description : 查询所有商品类型信息
+	 * <p>Method ：getAllGoodsInfo
+	 * <p>Description : 查询所有商品信息
 	 *
 	 * @return
 	 * @throws Exception 
@@ -52,29 +53,29 @@ public class GoodsTypeManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@GetMapping("/getAllGoodsType")
+	@GetMapping("/getAllGoodsInfo")
 	@ResponseBody
-	public Result getAllGoodsType () throws Exception  {
+	public Result getAllGoodsInfo () throws Exception  {
 		Result result = new Result();
-		List<GoodsType> goodsTypeList = new ArrayList<GoodsType>();
+		List<GoodsInfo> goodsList = new ArrayList<GoodsInfo>();
 		try {
-			goodsTypeList = this.goodsManageService.getAllGoodsType();
+			goodsList = this.goodsManageService.getAllGoodsInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询全部商品类型信息失败");
+			throw new BeforeJsonException("查询全部商品信息失败");
 		}
 		
 		result.setCode(1);
-		result.setMessage("查询全部商品类型信息成功");
-		result.setData(goodsTypeList);
+		result.setMessage("查询全部商品信息成功");
+		result.setData(goodsList);
 		return result;
 	}
 
 	/**
-	 * <p>Method ：saveGoodsType
-	 * <p>Description : 新增商品类型
+	 * <p>Method ：saveGoods
+	 * <p>Description : 新增商品
 	 *
-	 * @param goodsType
+	 * @param goods
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -85,30 +86,30 @@ public class GoodsTypeManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@PostMapping("/saveGoodsType")
+	@PostMapping("/saveGoods")
 	@ResponseBody
-	public Result saveGoodsType(@RequestBody GoodsType goodsType) throws Exception {
+	public Result saveGoods(@RequestBody Goods goods) throws Exception {
 		
 		Result result = new Result();	
 		try {
-			this.goodsManageService.saveGoodsType(goodsType);
+			this.goodsManageService.saveGoods(goods);
 		}catch (BeforeJsonException e) {
 			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("新增商品类型失败");
+			throw new BeforeJsonException("新增商品失败");
 		}
 		result.setCode(1);
-		result.setMessage("新增商品类型成功");
+		result.setMessage("新增商品成功");
 		result.setData(null);
 		return result;
 	}
 	
 	/**
-	 * <p>Method ：updateGoodsType
-	 * <p>Description : 修改商品类型
+	 * <p>Method ：updateGoods
+	 * <p>Description : 修改商品
 	 *
-	 * @param goodsType
+	 * @param goods
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -119,31 +120,31 @@ public class GoodsTypeManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@PostMapping("/updateGoodsType")
+	@PostMapping("/updateGoods")
 	@ResponseBody
-	public Result updateGoodsType(@RequestBody GoodsType goodsType) throws Exception {
+	public Result updateGoods(@RequestBody Goods goods) throws Exception {
 		
 		Result result = new Result();
 
 		try {
-			this.goodsManageService.updateGoodsType(goodsType);
+			this.goodsManageService.updateGoods(goods);
 		}catch (BeforeJsonException e) {
 			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("修改商品类型失败");
+			throw new BeforeJsonException("修改商品失败");
 		}
 		result.setCode(1);
-		result.setMessage("修改商品类型成功");
+		result.setMessage("修改商品成功");
 		result.setData(null);
 		return result;
 	}
 	
 	/**
-	 * <p>Method ：deleteGoodsTypeByGoodsTypeId
-	 * <p>Description : 通过商品类型ID删除商品类型
+	 * <p>Method ：deleteGoodsByGoodsId
+	 * <p>Description : 通过商品ID删除商品
 	 *
-	 * @param goodsTypeId
+	 * @param goodsId
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -154,31 +155,31 @@ public class GoodsTypeManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@DeleteMapping("/deleteGoodsTypeByGoodsTypeId")
+	@DeleteMapping("/deleteGoodsByGoodsId")
 	@ResponseBody
-	public Result deleteGoodsTypeByGoodsTypeId(@RequestBody List<String> goodsTypeIdList) throws Exception {
+	public Result deleteGoodsByGoodsId(@RequestBody List<String> goodsIdList) throws Exception {
 		
 		Result result = new Result();
 		
 		try {
-			this.goodsManageService.deleteGoodsTypeByGoodsTypeId(goodsTypeIdList);
+			this.goodsManageService.deleteGoodsByGoodsId(goodsIdList);
 		} catch (BeforeJsonException e) {
 			throw e;
 		}catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("删除商品类型失败");
+			throw new BeforeJsonException("删除商品失败");
 		}
 		result.setCode(1);
-		result.setMessage("删除商品类型成功");
+		result.setMessage("删除商品成功");
 		result.setData(null);
 		return result;
 	}
 	
 	/**
-	 * <p>Method ：getGoodsTypeByGoodsTypeId
-	 * <p>Description : 通过商品类型ID查询商品类型信息
+	 * <p>Method ：getGoodsInfoByGoodsId
+	 * <p>Description : 通过商品ID查询商品信息
 	 *
-	 * @param goodsTypeId
+	 * @param goodsId
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -189,21 +190,21 @@ public class GoodsTypeManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@GetMapping("/getGoodsTypeByGoodsTypeId")
+	@GetMapping("/getGoodsInfoByGoodsId")
 	@ResponseBody
-	public Result getGoodsTypeByGoodsTypeId (@RequestParam String goodsTypeId) throws Exception  {
+	public Result getGoodsByGoodsId (@RequestParam String goodsId) throws Exception  {
 		Result result = new Result();
-		GoodsType goodsType = new GoodsType();
+		Goods goods = new Goods();
 		try {
-			goodsType = this.goodsManageService.getGoodsTypeByGoodsTypeId(goodsTypeId);
+			goods = this.goodsManageService.getGoodsByGoodsId(goodsId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BeforeJsonException("查询商品类型信息失败");
+			throw new BeforeJsonException("查询商品信息失败");
 		}
 		
 		result.setCode(1);
-		result.setMessage("查询商品类型信息成功");
-		result.setData(goodsType);
+		result.setMessage("查询商品信息成功");
+		result.setData(goods);
 		return result;
 	}
 }

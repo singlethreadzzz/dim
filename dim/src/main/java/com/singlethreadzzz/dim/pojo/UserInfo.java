@@ -10,6 +10,8 @@ public class UserInfo {
 	
 	private String userPassword;
 	
+	private String roleId;
+	
 	private String roleName;
 	
 	private String roleCnname;
@@ -60,6 +62,14 @@ public class UserInfo {
 
 	public void setRoleCnname(String roleCnname) {
 		this.roleCnname = roleCnname;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 	
 }

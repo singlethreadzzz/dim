@@ -2,20 +2,76 @@ $(function () {
 	fnPageLoad();
 });
 function fnPageLoad(){
-	//初始化商品信息table
-	fnInitGoodsTable();
-	//初始化商品信息table多选框点击事件
-	fnInitGoodsTableCheckClick();
-	//初始化新增商品点击事件
-	fnInitAddGoodsClick();
-	//初始化修改商品点击事件
-	fnInitUpdateGoodsClick();
-	//初始化删除商品点击事件
-	fnInitDeleteGoodsClick();
-	//初始化新增商品类型下拉框
-	fnInitGoodsTypeSelect();
+	//初始化全部商品类型信息
+//	fnInitAllGoodsTypeHtml();
+	//初始化全部商品信息
+	fnInitAllGoodsHtml();
+	//初始化进货点击事件
+//	fnInitPurchaseClick();
+	//初始化售出点击事件
+//	fnInitSellClick();
 	//初始化商品新增或修改弹出模态框点击事件
-	fnInitSaveOrUpdateClick();
+//	fnInitSaveOrUpdateClick();
+}
+function fnInitAllGoodsTypeHtml(){
+	$.ajax({
+		  type: "GET",
+	      url: path + "/salesManage/getAllUsedGoodsType",
+	      data: "json",
+	      contentType: 'application/json',
+	      success: function (result) {
+	    	  if(result){
+	    		  if(result.code == 1){
+	    			  var data = result.data;
+	    			  for(i=0;i<data.length;i++){
+		    			  var goodsHtml = "<div id=" + data[i].goodsTypeCode +" class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h4 class='page-header'>" + data[i].goodsTypeName +"</h4></div></div>";
+		    			  $(".stockwarning").append(goodsHtml);
+	    			  }
+	    		  }else{
+	    			  toastr.error(result.message);
+	    		  }
+	    	  }
+		  },
+	      error: function (e) {
+	    	  toastr.error("查询已使用商品类型失败，请联系管理员");
+		  }
+	  });
+}
+function fnInitAllGoodsHtml(){
+	
+	$.ajax({
+		  type: "GET",
+	      url: path + "/goodsManage/getAllGoodsInfo",
+	      data: "json",
+	      contentType: 'application/json',
+	      success: function (result) {
+	    	  if(result){
+	    		  if(result.code == 1){
+	    			  var data = result.data;
+	    			  for(i=0;i<data.length;i++){
+	    				  var goodsTypeCodeHtml = $("#" + data[i].goodsTypeCode);
+	    				  if(!$.isEmptyObject(goodsTypeCodeHtml)){
+			    			  var goodsTypeHtml = "<div id=" + data[i].goodsTypeCode +" class='row'><div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><h4 class='page-header'>" + data[i].goodsTypeName +"</h4></div></div><div class='row' id="+ data[i].goodsTypeCode + "Row" +" ></div>";
+			    			  $(".stockwarning").append(goodsTypeHtml);
+	    				  }
+	    			      var goodsHtml = "<div class='row'><div class='col-xs-6 col-sm-6 col-md-3 col-lg-3'><div class='thumbnail'><img class='images' src='../static/image/sample.png' alt='...'><div class='caption'><h3>"+data[i].goodsName+"</h3><p><a value="+ data[i].goodsId +" class='btn btn-primary purchase' role='button'>进货</a>&nbsp;&nbsp;<a value="+ data[i].goodsId +" class='btn btn-primary sell' role='button'>售出</a></p></div></div></div></div>";
+    			          $("#"+data[i].goodsTypeCode + "Row").append(goodsHtml);
+	    			  }
+	    		  }else{
+	    			  toastr.error(result.message);
+	    		  }
+	    	  }
+		  },
+	      error: function (e) {
+	    	  toastr.error("查询商品失败，请联系管理员");
+		  }
+	  });
+}
+function fnInitPurchaseClick(){
+	
+}
+function fnInitSellClick(){
+	
 }
 function fnInitGoodsTable(){
 	

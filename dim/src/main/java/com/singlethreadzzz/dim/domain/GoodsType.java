@@ -11,7 +11,7 @@ public class GoodsType implements Serializable{
 	
 	private String goodsTypeId;
 	
-	private Integer goodsTypeCode;
+	private String goodsTypeCode;
 	
 	private String goodsTypeName;
 
@@ -23,11 +23,11 @@ public class GoodsType implements Serializable{
 		this.goodsTypeId = goodsTypeId;
 	}
 
-	public Integer getGoodsTypeCode() {
+	public String getGoodsTypeCode() {
 		return goodsTypeCode;
 	}
 
-	public void setGoodsTypeCode(Integer goodsTypeCode) {
+	public void setGoodsTypeCode(String goodsTypeCode) {
 		this.goodsTypeCode = goodsTypeCode;
 	}
 

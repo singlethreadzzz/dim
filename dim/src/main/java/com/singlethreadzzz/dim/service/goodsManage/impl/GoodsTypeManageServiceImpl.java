@@ -32,14 +32,14 @@ public class GoodsTypeManageServiceImpl implements GoodsTypeManageService{
 	private GoodsTypeManageMapper goodsTypeManageMapper;
 
 	@Override
-	public List<GoodsType> getAllGoodsTypeInfo() throws Exception {
-		return this.goodsTypeManageMapper.selectAllGoodsTypeInfo();
+	public List<GoodsType> getAllGoodsType() throws Exception {
+		return this.goodsTypeManageMapper.selectAllGoodsType();
 	}
 
 	@Override
 	public void saveGoodsType(GoodsType goodsType) throws Exception {
 		GoodsType oldGoodsType = new GoodsType();
-		oldGoodsType = this.getGoodsTypeInfoByGoodsTypeCode(goodsType.getGoodsTypeCode());
+		oldGoodsType = this.getGoodsTypeByGoodsTypeCode(goodsType.getGoodsTypeCode());
 		if(oldGoodsType != null) {
 			throw new BeforeJsonException("商品类型编码已存在");
 		}
@@ -52,7 +52,7 @@ public class GoodsTypeManageServiceImpl implements GoodsTypeManageService{
 	public void deleteGoodsTypeByGoodsTypeId(List<String> goodsTypeIdList) throws Exception {
 		for(String goodsTypeId : goodsTypeIdList) {
 			GoodsType oldGoodsType = new GoodsType();
-			oldGoodsType = this.goodsTypeManageMapper.selectGoodsTypeInfoByGoodsTypeId(goodsTypeId);
+			oldGoodsType = this.goodsTypeManageMapper.selectGoodsTypeByGoodsTypeId(goodsTypeId);
 			if(oldGoodsType == null) {
 				throw new BeforeJsonException("商品类型信息不存在");
 			}
@@ -64,12 +64,7 @@ public class GoodsTypeManageServiceImpl implements GoodsTypeManageService{
 	public void updateGoodsType(GoodsType goodsType) throws Exception {
 		GoodsType oldGoodsType = new GoodsType();
 		
-		oldGoodsType = this.getGoodsTypeInfoByGoodsTypeCode(goodsType.getGoodsTypeCode());
-		if(oldGoodsType != null) {
-			throw new BeforeJsonException("商品类型编码已存在");
-		}
-		
-		oldGoodsType = this.getGoodsTypeInfoByGoodsTypeId(goodsType.getGoodsTypeId());
+		oldGoodsType = this.getGoodsTypeByGoodsTypeId(goodsType.getGoodsTypeId());
 		if(oldGoodsType == null) {
 			throw new BeforeJsonException("商品类型信息不存在");
 		}
@@ -81,13 +76,13 @@ public class GoodsTypeManageServiceImpl implements GoodsTypeManageService{
 	}
 
 	@Override
-	public GoodsType getGoodsTypeInfoByGoodsTypeId(String goodsTypeId) throws Exception {
-		return this.goodsTypeManageMapper.selectGoodsTypeInfoByGoodsTypeId(goodsTypeId);
+	public GoodsType getGoodsTypeByGoodsTypeId(String goodsTypeId) throws Exception {
+		return this.goodsTypeManageMapper.selectGoodsTypeByGoodsTypeId(goodsTypeId);
 	}
 
 	@Override
-	public GoodsType getGoodsTypeInfoByGoodsTypeCode(Integer goodsTypeCode) throws Exception {
-		return this.goodsTypeManageMapper.selectGoodsTypeInfoByGoodsTypeCode(goodsTypeCode);
+	public GoodsType getGoodsTypeByGoodsTypeCode(String goodsTypeCode) throws Exception {
+		return this.goodsTypeManageMapper.selectGoodsTypeByGoodsTypeCode(goodsTypeCode);
 	}
 
 }

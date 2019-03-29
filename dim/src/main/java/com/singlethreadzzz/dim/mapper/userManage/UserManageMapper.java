@@ -49,9 +49,10 @@ public interface UserManageMapper {
 		{ @Result(property = "userId", column = "USER_ID"),
 		  @Result(property = "userAccount", column = "USER_ACCOUNT"), 
 		  @Result(property = "userName", column = "USER_NAME"),
+		  @Result(property = "roleId", column = "ROLE_ID"),
 		  @Result(property = "roleName", column = "ROLE_NAME"),
 		  @Result(property = "roleCnname", column = "ROLE_CNNAME")})
-	@Select("select a.USER_ID,a.USER_ACCOUNT,a.USER_NAME,b.ROLE_NAME,b.ROLE_CNNAME from dim_user a,dim_role b where a.ROLE_ID = b.ROLE_ID and a.USER_ACCOUNT != 'admin'")
+	@Select("select a.USER_ID,a.USER_ACCOUNT,a.USER_NAME,b.ROLE_Id,b.ROLE_NAME,b.ROLE_CNNAME from dim_user a,dim_role b where a.ROLE_ID = b.ROLE_ID and a.USER_ACCOUNT != 'admin'")
 	public List<UserInfo> selectAllUsersInfo();
 
 }

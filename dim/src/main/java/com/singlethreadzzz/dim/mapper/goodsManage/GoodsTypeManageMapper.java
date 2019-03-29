@@ -32,7 +32,7 @@ import com.singlethreadzzz.dim.domain.GoodsType;
 public interface GoodsTypeManageMapper {
 	
 	/**
-	 * <p>Method ：selectAllGoodsTypeInfo
+	 * <p>Method ：selectAllGoodsType
 	 * <p>Description : 查询所有商品类型信息
 	 *
 	 * @return 
@@ -50,7 +50,7 @@ public interface GoodsTypeManageMapper {
 		       @Result(property = "goodsTypeName", column = "GOODS_TYPE_NAME")
 		})
 	@Select("select GOODS_TYPE_ID,GOODS_TYPE_CODE,GOODS_TYPE_NAME from dim_goods_type")
-	public List<GoodsType> selectAllGoodsTypeInfo();
+	public List<GoodsType> selectAllGoodsType();
 
 	/**
 	 * <p>Method ：insertGoodsType
@@ -101,7 +101,7 @@ public interface GoodsTypeManageMapper {
 	public void updateGoodsType(GoodsType goodsType);
     
     /**
-     * <p>Method ：selectGoodsTypeInfoByGoodsTypeId
+     * <p>Method ：selectGoodsTypeByGoodsTypeId
      * <p>Description : 通过商品类型ID查询商品类型信息
      *
      * @param goodsTypeId
@@ -116,10 +116,10 @@ public interface GoodsTypeManageMapper {
      */
     @ResultMap("GoodsType")
 	@Select("select GOODS_TYPE_ID,GOODS_TYPE_CODE,GOODS_TYPE_NAME from dim_goods_type where GOODS_TYPE_ID = #{goodsTypeId}")
-	public GoodsType selectGoodsTypeInfoByGoodsTypeId(@Param("goodsTypeId") String goodsTypeId);
+	public GoodsType selectGoodsTypeByGoodsTypeId(@Param("goodsTypeId") String goodsTypeId);
     
     /**
-     * <p>Method ：selectGoodsTypeInfoByGoodsTypeCode
+     * <p>Method ：selectGoodsTypeByGoodsTypeCode
      * <p>Description : 通过商品类型编码查询商品类型信息
      *
      * @param goodsTypeCode
@@ -134,6 +134,6 @@ public interface GoodsTypeManageMapper {
      */
     @ResultMap("GoodsType")
 	@Select("select GOODS_TYPE_ID,GOODS_TYPE_CODE,GOODS_TYPE_NAME from dim_goods_type where GOODS_TYPE_CODE = #{goodsTypeCode}")
-	public GoodsType selectGoodsTypeInfoByGoodsTypeCode(@Param("goodsTypeCode") Integer goodsTypeCode);
+	public GoodsType selectGoodsTypeByGoodsTypeCode(@Param("goodsTypeCode") String goodsTypeCode);
 
 }

@@ -2,11 +2,12 @@ package com.singlethreadzzz.dim.service.goodsManage;
 
 import java.util.List;
 
-import com.singlethreadzzz.dim.domain.GoodsType;
+import com.singlethreadzzz.dim.domain.Goods;
+import com.singlethreadzzz.dim.pojo.GoodsInfo;
 
 /**
- * <p>Class       : com.singlethreadzzz.dim.service.goodsManage.GoodsTypeManageService
- * <p>Descdription: 商品类型管理逻辑层接口类
+ * <p>Class       : com.singlethreadzzz.dim.service.goodsManage.GoodsManageService
+ * <p>Descdription: 商品管理逻辑层接口类
  *
  * @author  単スレッド-singlethreadzzz@gmail.com
  * @version 1.0.0
@@ -17,11 +18,11 @@ import com.singlethreadzzz.dim.domain.GoodsType;
  *--------------------------------------------------------------<br>
  *</p>
  */
-public interface GoodsTypeManageService {
+public interface GoodsManageService {
 	
 	/**
-	 * <p>Method ：getAllGoodsType
-	 * <p>Description : 查询所有商品类型信息
+	 * <p>Method ：getAllGoodsInfo
+	 * <p>Description : 查询所有商品信息
 	 *
 	 * @return
 	 * @throws Exception 
@@ -33,13 +34,13 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public List<GoodsType> getAllGoodsType() throws Exception ;
+	public List<GoodsInfo> getAllGoodsInfo() throws Exception ;
 		
 	/**
-	 * <p>Method ：saveGoodsType
-	 * <p>Description : 新增商品类型
+	 * <p>Method ：saveGoods
+	 * <p>Description : 新增商品
 	 *
-	 * @param goodsType
+	 * @param goods
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
 	 *<p>
@@ -49,13 +50,13 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public void saveGoodsType(GoodsType goodsType) throws Exception;
+	public void saveGoods(Goods goods) throws Exception;
 	
 	/**
-	 * <p>Method ：deleteGoodsTypeByGoodsTypeId
-	 * <p>Description : 通过商品类型ID删除商品类型
+	 * <p>Method ：deleteGoodsByGoodsId
+	 * <p>Description : 通过商品ID删除商品
 	 *
-	 * @param goodsTypeId
+	 * @param goodsId
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
 	 *<p>
@@ -65,13 +66,13 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public void deleteGoodsTypeByGoodsTypeId(List<String> goodsTypeIdList) throws Exception ;
+	public void deleteGoodsByGoodsId(List<String> goodsIdList) throws Exception ;
 	
 	/**
-	 * <p>Method ：updateGoodsType
-	 * <p>Description : 修改商品类型
+	 * <p>Method ：updateGoods
+	 * <p>Description : 修改商品
 	 *
-	 * @param goodsType
+	 * @param goods
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
 	 *<p>
@@ -81,13 +82,13 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public void updateGoodsType(GoodsType goodsType) throws Exception ;
+	public void updateGoods(Goods goods) throws Exception ;
 	
 	/**
-	 * <p>Method ：getGoodsTypeByGoodsTypeId
-	 * <p>Description : 通过商品类型ID查询商品类型信息
+	 * <p>Method ：getGoodsByGoodsId
+	 * <p>Description : 通过商品ID查询商品信息
 	 *
-	 * @param goodsTypeId
+	 * @param goodsId
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -98,13 +99,13 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public GoodsType getGoodsTypeByGoodsTypeId(String goodsTypeId) throws Exception ;
+	public Goods getGoodsByGoodsId(String goodsId) throws Exception ;
 	
 	/**
-	 * <p>Method ：getGoodsTypeByGoodsTypeCode
-	 * <p>Description : 通过商品类型编码查询商品类型信息
+	 * <p>Method ：getGoodsByGoodsCode
+	 * <p>Description : 通过商品编码查询商品信息
 	 *
-	 * @param goodsTypeCode
+	 * @param goodsCode
 	 * @return
 	 * @throws Exception 
 	 * @author  単スレッド-singlethreadzzz@gmail.com
@@ -115,6 +116,6 @@ public interface GoodsTypeManageService {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	public GoodsType getGoodsTypeByGoodsTypeCode(String goodsTypeCode) throws Exception ;
+	public Goods getGoodsByGoodsCode(String goodsCode) throws Exception ;
 
 }
