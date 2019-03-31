@@ -7,6 +7,10 @@ footer {
     background-color: #2a2730;
 }
 
+.container {
+	min-height: 100%;
+}
+
 .stock {
     background-color: red;
     font-weight: bold;
@@ -53,8 +57,4 @@ footer {
     position: absolute;
     top: 0;
     left: 4px;
-}
-
-.images{
-    padding: 10px;
 }

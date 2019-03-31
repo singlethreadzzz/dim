@@ -87,7 +87,7 @@ function fnInitGoodsTable(){
 				cname: "商品库存",
 				sWidth: "10%",
 				data: "goodsStock",
-				orderable: false,
+				orderable: true,
 				render: function(data, type , full, meta) {
 					return "<td title='" + data + "'>" + data + "</td>";
 				}
@@ -95,7 +95,7 @@ function fnInitGoodsTable(){
 				cname: "商品进货价格",
 				sWidth: "10%",
 				data: "goodsPurchasePrice",
-				orderable: false,
+				orderable: true,
 				render: function(data, type , full, meta) {
 					return "<td title='" + data + "'>" + data + "</td>";
 				}
@@ -103,7 +103,7 @@ function fnInitGoodsTable(){
 				cname: "商品售出价",
 				sWidth: "10%",
 				data: "goodsSellPrice",
-				orderable: false,
+				orderable: true,
 				render: function(data, type , full, meta) {
 					return "<td title='" + data + "'>" + data + "</td>";
 				}

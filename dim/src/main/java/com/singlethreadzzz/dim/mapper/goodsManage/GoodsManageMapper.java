@@ -108,7 +108,7 @@ public interface GoodsManageMapper {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@Update("update dim_goods set GOODS_NAME = #{goodsName},GOODS_CODE = #{goodsCode},GOODS_STOCK = #{goodsStock},GOODS_PURCHASE_PRICE = #{goodsPurchasePrice},GOODS_SELL_PRICE = #{goodsSellPrice},GOODS_DESCRIBE = #{goodsDescribe},GOODS_PICTURE_ID = #{goodsPictureId},GOODS_UPDATE_USER = #{goodsUpdateUser},GOODS_UPDATE_TIME = #{goodsUpdateTime} where GOODS_ID = #{goodsId}")
+	@Update("update dim_goods set GOODS_NAME = #{goodsName},GOODS_TYPE_CODE = #{goodsTypeCode},GOODS_STOCK = #{goodsStock},GOODS_PURCHASE_PRICE = #{goodsPurchasePrice},GOODS_SELL_PRICE = #{goodsSellPrice},GOODS_DESCRIBE = #{goodsDescribe},GOODS_PICTURE_ID = #{goodsPictureId},GOODS_UPDATE_USER = #{goodsUpdateUser},GOODS_UPDATE_TIME = #{goodsUpdateTime} where GOODS_ID = #{goodsId}")
 	public void updateGoods(Goods Goods);
     
     /**
