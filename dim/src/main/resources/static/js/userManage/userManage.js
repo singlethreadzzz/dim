@@ -4,8 +4,6 @@ $(function () {
 function fnPageLoad(){
 	//初始化用户信息table
 	fnInitUserTable();
-	//初始化用户信息table多选框点击事件
-	fnInitUserTableCheckClick();
 	//初始化新增用户点击事件
 	fnInitAddUserClick();
 	//初始化修改用户点击事件
@@ -49,7 +47,8 @@ function fnInitUserTable(){
 			}
 		},
 		drawCallback: function(settings) {
-			
+			//初始化用户信息table多选框点击事件
+			fnInitUserTableCheckClick();
 		},
 		columns: [
 			{
@@ -95,6 +94,18 @@ function fnInitUserTableCheckClick(){
 	      var check = $(this).prop("checked");
 	      $(".checkchild").prop("checked", check);
 	});
+	
+	$(".checkchild").each(function(){
+		var length = $(this).length;
+	    $(this).on("change", function(e) {
+			var selectedlength = $(".checkchild:checked").length;
+			if(selectedlength == 0 || selectedlength!=length){
+				$(".checkall").prop("checked",false);
+			}else{
+				$(".checkall").prop("checked",true); 
+			}
+		});
+	  });
 }
 function fnInitAddUserClick(){
 	$("#addUser").click(function() {

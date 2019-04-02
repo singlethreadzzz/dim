@@ -190,7 +190,7 @@ public class GoodsManageController {
 	 *--------------------------------------------------------------<br>
 	 *</p>
 	 */
-	@GetMapping("/getGoodsInfoByGoodsId")
+	@GetMapping("/getGoodsByGoodsId")
 	@ResponseBody
 	public Result getGoodsByGoodsId (@RequestParam String goodsId) throws Exception  {
 		Result result = new Result();
@@ -205,6 +205,39 @@ public class GoodsManageController {
 		result.setCode(1);
 		result.setMessage("查询商品信息成功");
 		result.setData(goods);
+		return result;
+	}
+	
+	/**
+	 * <p>Method ：getGoodsInfoByGoodsId
+	 * <p>Description : 通过商品ID查询商品信息
+	 *
+	 * @param goodsId
+	 * @return
+	 * @throws Exception 
+	 * @author  単スレッド-singlethreadzzz@gmail.com
+	 *<p>
+	 *--------------------------------------------------------------<br>
+	 * 修改履历：<br>
+	 *        <li> 2019年3月27日，singlethreadzzz@gmail.com，创建方法；<br>
+	 *--------------------------------------------------------------<br>
+	 *</p>
+	 */
+	@GetMapping("/getGoodsInfoByGoodsId")
+	@ResponseBody
+	public Result getGoodsInfoByGoodsId (@RequestParam String goodsId) throws Exception  {
+		Result result = new Result();
+		GoodsInfo goodsInfo = new GoodsInfo();
+		try {
+			goodsInfo = this.goodsManageService.getGoodsInfoByGoodsId(goodsId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BeforeJsonException("查询商品信息失败");
+		}
+		
+		result.setCode(1);
+		result.setMessage("查询商品信息成功");
+		result.setData(goodsInfo);
 		return result;
 	}
 }

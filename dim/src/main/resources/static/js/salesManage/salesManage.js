@@ -42,9 +42,39 @@ function fnInitAllGoodsHtml(){
 }
 function fnInitPurchaseClick(){
 	$(".purchase").each(function(){
+		var goodsId = $(this).attr("value");
 	    $(this).click(function(){
 			$("#purchaseForm")[0].reset();
 			$("#purchaseModal").modal();
+			$.ajax({
+				  type: "GET",
+			      url: path + "/goodsManage/getGoodsInfoByGoodsId",
+			      data: "json",
+			      contentType: 'application/json',
+			      data: {
+			    	  goodsId: goodsId
+			      },
+			      success: function (result) {
+			    	  if(result){
+			    		  if(result.code == 1){
+			    				$("#goodsCode").html(result.data.goodsCode);
+			    				$("#goodsName").html(result.data.goodsName);
+			    				$("#goodsTypeName").html(result.data.goodsTypeName);
+			    				$("#goodsPurchasePrice").val(result.data.goodsPurchasePrice);
+			    				var time = getFormat();
+			    				alert(time);
+			    				$("#goodsPurchaseTime").val(time);
+			    				$("#goodsDescribe").html(result.data.goodsDescribe);
+			    				$("#goodsStock").html(result.data.goodsStock);
+			    		  }else{
+			    			  toastr.error(result.message);
+			    		  }
+			    	  }
+				  },
+			      error: function (e) {
+			    	  toastr.error("查询商品失败，请联系管理员");
+				  }
+			  });
 	     })
 	});
 }
@@ -65,13 +95,19 @@ function fnInitSellClick(){
 			      success: function (result) {
 			    	  if(result){
 			    		  if(result.code == 1){
-			    				$("#goodsCode").val(result.data.goodsCode);
-			    				$("#goodsCode").attr('readonly', true);
-			    				$("#goodsName").val(result.data.goodsName);
-			    				$("#goodsTypeCode").val(result.data.goodsTypeCode);
-			    				$("#goodsPurchasePrice").val(result.data.goodsPurchasePrice);
-			    				$("#goodsSellPrice").val(result.data.goodsSellPrice);
-			    				$("#goodsDescribe").val(result.data.goodsDescribe);
+			    				$("#goodsCode").html(result.data.goodsCode);
+			    				$("#goodsName").html(result.data.goodsName);
+			    				$("#goodsTypeName").html(result.data.goodsTypeName);
+			    				if($("#goodsPurchasePrice")){
+			    					$("#goodsPurchasePrice").val(result.data.goodsPurchasePrice);
+			    					$("#goodsPurchaseTime").html(result.data.goodsStock);
+			    				}
+			    				if($("#goodsSellPrice")){
+			    					$("#goodsSellPrice").val(result.data.goodsSellPrice);
+			    					$("#goodsPurchaseTime").html(result.data.goodsStock);
+			    				}
+			    				$("#goodsDescribe").html(result.data.goodsDescribe);
+			    				$("#goodsStock").html(result.data.goodsStock);
 			    				$("#goodsEdit").modal();
 			    		  }else{
 			    			  toastr.error(result.message);
@@ -274,4 +310,22 @@ function fnInitModalSellClick() {
 			  }
 		  });
 	}
+}
+function getFormat(){
+	var format = "";
+	var nTime = new Date();
+	format += nTime.getFullYear() + "-";
+	format += (nTime.getMonth() + 1) < 10 ? "0" + (nTime.getMonth() + 1)
+			: (nTime.getMonth() + 1);
+	format += "-";
+	format += nTime.getDate() < 10 ? "0" + (nTime.getDate())
+			: (nTime.getDate());
+	format += "T";
+	format += nTime.getHours() < 10 ? "0" + (nTime.getHours()) : (nTime
+			.getHours());
+	format += ":";
+	format += nTime.getMinutes() < 10 ? "0" + (nTime.getMinutes()) : (nTime
+			.getMinutes());
+	format += ":00";
+	return format;
 }

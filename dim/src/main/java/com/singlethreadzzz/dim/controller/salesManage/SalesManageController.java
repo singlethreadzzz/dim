@@ -6,9 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.singlethreadzzz.dim.domain.GoodsPurchaseLog;
+import com.singlethreadzzz.dim.domain.GoodsSellLog;
 import com.singlethreadzzz.dim.domain.GoodsType;
 import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.pojo.Result;
@@ -36,6 +40,41 @@ public class SalesManageController {
 		result.setCode(1);
 		result.setMessage("查询全部使用商品类型成功");
 		result.setData(goodsTypeList);
+		return result;
+	}
+	
+	@PostMapping("/saveGoodsPurchaseLog")
+	@ResponseBody
+	public Result saveGoodsPurchaseLog(@RequestBody GoodsPurchaseLog goodsPurchaseLog) throws Exception {
+		Result result = new Result();
+		try {
+			this.salesManageService.saveGoodsPurchaseLog(goodsPurchaseLog);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BeforeJsonException("保存进货信息失败");
+		}
+		
+		result.setCode(1);
+		result.setMessage("保存进货信息成功");
+		result.setData(null);
+		return result;
+		
+	}
+	
+	@PostMapping("/saveGoodsSellLog")
+	@ResponseBody
+	public Result saveGoodsSellLog(@RequestBody GoodsSellLog goodsSellLog) throws Exception {
+		Result result = new Result();
+		try {
+			this.salesManageService.saveGoodsSellLog(goodsSellLog);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BeforeJsonException("保存售出信息失败");
+		}
+		
+		result.setCode(1);
+		result.setMessage("保存售出信息成功");
+		result.setData(null);
 		return result;
 	}
 

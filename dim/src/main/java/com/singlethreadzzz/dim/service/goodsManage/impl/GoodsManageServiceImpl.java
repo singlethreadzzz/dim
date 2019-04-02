@@ -107,4 +107,9 @@ public class GoodsManageServiceImpl implements GoodsManageService{
 		return this.goodsManageMapper.selectGoodsByGoodsCode(goodsCode);
 	}
 
+	@Override
+	public GoodsInfo getGoodsInfoByGoodsId(String goodsId) throws Exception {
+		return this.goodsManageMapper.selectGoodsInfoByGoodsId(goodsId);
+	}
+
 }

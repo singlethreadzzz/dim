@@ -117,5 +117,22 @@ public interface GoodsManageService {
 	 *</p>
 	 */
 	public Goods getGoodsByGoodsCode(String goodsCode) throws Exception ;
+	
+	/**
+	 * <p>Method ：getGoodsByGoodsId
+	 * <p>Description : 通过商品ID查询商品信息
+	 *
+	 * @param goodsId
+	 * @return
+	 * @throws Exception 
+	 * @author  単スレッド-singlethreadzzz@gmail.com
+	 *<p>
+	 *--------------------------------------------------------------<br>
+	 * 修改履历：<br>
+	 *        <li> 2019年3月27日，singlethreadzzz@gmail.com，创建方法；<br>
+	 *--------------------------------------------------------------<br>
+	 *</p>
+	 */
+	public GoodsInfo getGoodsInfoByGoodsId(String goodsId) throws Exception ;
 
 }

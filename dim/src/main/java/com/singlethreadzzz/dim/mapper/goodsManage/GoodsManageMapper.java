@@ -179,5 +179,9 @@ public interface GoodsManageMapper {
 		})
 	@Select("select a.GOODS_ID,a.GOODS_NAME,a.GOODS_CODE,a.GOODS_STOCK,a.GOODS_PURCHASE_PRICE,a.GOODS_SELL_PRICE,a.GOODS_DESCRIBE,a.GOODS_PICTURE_ID,a.GOODS_CREATE_USER,a.GOODS_CREATE_TIME,a.GOODS_UPDATE_USER,a.GOODS_UPDATE_TIME,b.GOODS_TYPE_ID,b.GOODS_TYPE_CODE,b.GOODS_TYPE_NAME from dim_goods a,dim_goods_type b where a.GOODS_TYPE_CODE = b.GOODS_TYPE_CODE")
 	public List<GoodsInfo> selectAllGoodsInfo();
+	
+	@ResultMap("GoodsInfo")
+	@Select("select a.GOODS_ID,a.GOODS_NAME,a.GOODS_CODE,a.GOODS_STOCK,a.GOODS_PURCHASE_PRICE,a.GOODS_SELL_PRICE,a.GOODS_DESCRIBE,a.GOODS_PICTURE_ID,a.GOODS_CREATE_USER,a.GOODS_CREATE_TIME,a.GOODS_UPDATE_USER,a.GOODS_UPDATE_TIME,b.GOODS_TYPE_ID,b.GOODS_TYPE_CODE,b.GOODS_TYPE_NAME from dim_goods a,dim_goods_type b where a.GOODS_TYPE_CODE = b.GOODS_TYPE_CODE and a.GOODS_ID = #{goodsId}")
+	public GoodsInfo selectGoodsInfoByGoodsId(@Param("goodsId") String goodsId);
 
 }
