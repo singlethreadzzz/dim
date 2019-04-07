@@ -1,5 +1,6 @@
 package com.singlethreadzzz.dim.service.goodsManage.impl;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,7 +47,7 @@ public class GoodsManageServiceImpl implements GoodsManageService{
 		Goods oldGoods = new Goods();
 		oldGoods = this.getGoodsByGoodsCode(goods.getGoodsCode());
 		if(oldGoods != null) {
-			throw new BeforeJsonException("商品类型编码已存在");
+			throw new BeforeJsonException("商品编码已存在");
 		}
 		goods.setGoodsId(UUIDUtils.getUUID());
 		goods.setGoodsStock(0);
@@ -67,7 +68,7 @@ public class GoodsManageServiceImpl implements GoodsManageService{
 			Goods oldGoods = new Goods();
 			oldGoods = this.goodsManageMapper.selectGoodsByGoodsId(goodsId);
 			if(oldGoods == null) {
-				throw new BeforeJsonException("商品类型信息不存在");
+				throw new BeforeJsonException("商品信息不存在");
 			}
 			this.goodsManageMapper.deleteGoodsByGoodsId(goodsId);
 		};
@@ -76,10 +77,9 @@ public class GoodsManageServiceImpl implements GoodsManageService{
 	@Override
 	public void updateGoods(Goods goods) throws Exception {
 		Goods oldGoods = new Goods();
-		
 		oldGoods = this.getGoodsByGoodsId(goods.getGoodsId());
 		if(oldGoods == null) {
-			throw new BeforeJsonException("商品类型信息不存在");
+			throw new BeforeJsonException("商品信息不存在");
 		}
 		
 		oldGoods.setGoodsCode(goods.getGoodsCode());
@@ -110,6 +110,35 @@ public class GoodsManageServiceImpl implements GoodsManageService{
 	@Override
 	public GoodsInfo getGoodsInfoByGoodsId(String goodsId) throws Exception {
 		return this.goodsManageMapper.selectGoodsInfoByGoodsId(goodsId);
+	}
+
+	@Override
+	public void updateGoodsImageId(Goods goods) throws Exception {
+		Goods oldGoods = new Goods();
+		oldGoods = this.getGoodsByGoodsId(goods.getGoodsId());
+		if(oldGoods == null) {
+			throw new BeforeJsonException("商品信息不存在");
+		}
+		
+		oldGoods.setGoodsPictureId(goods.getGoodsPictureId());
+		User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
+		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+		oldGoods.setGoodsUpdateTime(timestamp);
+		oldGoods.setGoodsUpdateUser(currentUser.getUserAccount());
+		
+		this.goodsManageMapper.updateGoods(oldGoods);
+	}
+
+	@Override
+	public void deleteGoodsImageByGoodsId(List<String> goodsIdList, String path) throws Exception {
+		for (String goodsId : goodsIdList) {
+			Goods oldGoods = new Goods();
+			oldGoods = this.getGoodsByGoodsId(goodsId);
+	        File file = new File(path+"/"+oldGoods.getGoodsPictureId());
+	        if(file.exists()&&file.isFile()) {
+	        	file.delete();
+	        }
+		}
 	}
 
 }

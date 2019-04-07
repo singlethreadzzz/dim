@@ -58,3 +58,11 @@ footer {
     top: 0;
     left: 4px;
 }
+
+/* .modal-dialog {
+    height:800px;
+	overflow-y: scroll;
+}
+.modal-dialog::-webkit-scrollbar {
+    display: none;
+} */

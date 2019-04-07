@@ -1,5 +1,5 @@
 //全局工具
-var utils = {
+var dimUtils = {
 	/*
 	 * 时间转换方法
 	 */
@@ -48,5 +48,13 @@ var utils = {
 			retV = retV.replace(/w/g, "0");
 		}
 		return retV;
+	},
+	randomColor: function(){//十六进制颜色随机
+		var r = Math.floor(Math.random()*256);
+		var g = Math.floor(Math.random()*256);
+		var b = Math.floor(Math.random()*256);
+		var color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+		return color;
 	}
+
 }

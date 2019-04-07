@@ -9,14 +9,16 @@
 	<title>DIM库存管理系统</title>
 	<head th:replace="head"></head>
 	
+	<link href="../static/css/dataDisplay/dataDisplay.css" th:href="@{/static/css/dataDisplay/dataDisplay.css}" rel="stylesheet"></link>
    	<script type="text/javascript" src="../static/js/dataDisplay/dataDisplay.js" th:src="@{/static/js/dataDisplay/dataDisplay.js}"></script>
+	<head th:replace="echartsHead"></head>
 	
 	<head th:replace="inline"></head>
 </head>
 
 <body>
     <header th:replace="header"></header>
-    <div class="container">
+    <div id="mainContainer" class="container">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <h3 class="page-header">数据展示</h3>
@@ -29,21 +31,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <h5 class="page-header">当月销售额top10</h5>
-                    <div id="nowTop"></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="sameMonthSalesVolumeTop" class="echarts"></div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <h5 class="page-header">当月销售额low10</h5>
-                    <div id="nowLow"></div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <h5 class="page-header">当月净利润top10</h5>
-                    <div id="nowLow"></div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <h5 class="page-header">当月净利润low10</h5>
-                    <div id="nowLow"></div>
+            </div>
+           	<div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="sameMonthSalesVolumeTypeTop" class="echarts"></div>
                 </div>
             </div>
         </div>

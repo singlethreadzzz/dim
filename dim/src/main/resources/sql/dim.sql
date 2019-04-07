@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地mysql80root
+Source Server         : dim
 Source Server Version : 80015
 Source Host           : localhost:3306
 Source Database       : dim
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2019-03-10 17:18:23
+Date: 2019-04-07 12:50:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `dim_goods` (
 `GOODS_PURCHASE_PRICE`  float NULL DEFAULT NULL COMMENT '商品进货价格' ,
 `GOODS_SELL_PRICE`  float NULL DEFAULT NULL COMMENT '商品售出价格' ,
 `GOODS_DESCRIBE`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '商品描述' ,
-`GOODS_PICTURE_ID`  varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片ID' ,
+`GOODS_PICTURE_ID`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品图片ID' ,
 `GOODS_CREATE_USER`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品创建者' ,
 `GOODS_CREATE_TIME`  datetime NULL DEFAULT NULL COMMENT '商品创建时间' ,
 `GOODS_UPDATE_USER`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品修改者' ,

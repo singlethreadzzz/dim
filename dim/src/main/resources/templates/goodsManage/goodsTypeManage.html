@@ -10,6 +10,7 @@
 	<head th:replace="head"></head>
 	
 	<head th:replace="dataTableHead"></head>
+	<link href="../static/css/goodsManage/goodsTypeManage.css" th:href="@{/static/css/goodsManage/goodsTypeManage.css}" rel="stylesheet"></link>
     <script type="text/javascript" src="../static/js/goodsManage/goodsTypeManage.js" th:src="@{/static/js/goodsManage/goodsTypeManage.js}"></script>
     
     <head th:replace="inline"></head>
@@ -17,13 +18,13 @@
 
 <body>
 	<header th:replace="header"></header>
-    <div class="container">
+    <div id="mainContainer" class="container">
         <div class="stockwarning">
             <div class="row">
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <h3 class="page-header">商品管理</h3>
                     <a href="goodsManage.html" th:href="@{/goodsManage}" class="btn btn-primary" role="button">商品编辑</a>
-                    <a href="goodsTypeManage.html" th:href="@{/goodsTypeManage}" class="btn btn-primary bottom" role="button">商品类型编辑</a>
+                    <a href="goodsTypeManage.html" th:href="@{/goodsTypeManage}" class="btn btn-primary active" role="button">商品类型编辑</a>
                 </div>
             </div>
             <div class="row">
@@ -41,7 +42,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <table id="goodsTypeTable" style="cellspacing:0;width: 100%">
+                    <table id="goodsTypeTable" class="table table-striped table-bordered" style="cellspacing:0;width: 100%">
 						<thead>
 							<tr>
 								<th width="10%">

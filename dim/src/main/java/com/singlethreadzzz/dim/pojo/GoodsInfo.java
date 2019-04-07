@@ -8,7 +8,7 @@ public class GoodsInfo {
 	
 	private String goodsName;
 	
-	private Integer goodsCode;
+	private String goodsCode;
 	
 	private Integer goodsStock;
 	
@@ -51,11 +51,11 @@ public class GoodsInfo {
 		this.goodsName = goodsName;
 	}
 
-	public Integer getGoodsCode() {
+	public String getGoodsCode() {
 		return goodsCode;
 	}
 
-	public void setGoodsCode(Integer goodsCode) {
+	public void setGoodsCode(String goodsCode) {
 		this.goodsCode = goodsCode;
 	}
 

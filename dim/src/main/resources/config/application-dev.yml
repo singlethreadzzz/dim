@@ -7,7 +7,8 @@ logging:
     com.singlethreadzzz.dim: info
   file: logs/dim.log
 spring:
-  resources:
+  servlet:    multipart:      max-file-size: 10MB
+      max-request-size: 100MB  resources:
     static-locations: classpath:/static/
     cache:      period: 0
   mvc: 

@@ -10,6 +10,8 @@
 	<head th:replace="head"></head>
 	
 	<head th:replace="dataTableHead"></head>
+	<head th:replace="fileInputHead"></head>
+	<link href="../static/css/goodsManage/goodsManage.css" th:href="@{/static/css/goodsManage/goodsManage.css}" rel="stylesheet"></link>
     <script type="text/javascript" src="../static/js/goodsManage/goodsManage.js" th:src="@{/static/js/goodsManage/goodsManage.js}"></script>
     
     <head th:replace="inline"></head>
@@ -17,13 +19,13 @@
 
 <body>
 	<header th:replace="header"></header>
-    <div class="container">
+    <div id="mainContainer" class="container">
         <div class="stockwarning">
             <div class="row">
                 <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <h3 class="page-header">商品管理</h3>
-                    <a href="goodsManage.html" th:href="@{/goodsManage}" class="btn btn-primary" role="button">商品编辑</a>
-                    <a href="goodsTypeManage.html" th:href="@{/goodsTypeManage}" class="btn btn-primary bottom" role="button">商品类型编辑</a>
+                    <a href="goodsManage.html" th:href="@{/goodsManage}" class="btn btn-primary active" role="button">商品编辑</a>
+                    <a href="goodsTypeManage.html" th:href="@{/goodsTypeManage}" class="btn btn-primary" role="button">商品类型编辑</a>
                 </div>
             </div>
             <div class="row">
@@ -32,6 +34,7 @@
                     <a id="addGoods" class="btn btn-primary" role="button">新增</a>
                     <a id="updateGoods" class="btn btn-primary bottom" role="button">修改</a>
                     <a id="deleteGoods" class="btn btn-primary bottom" role="button">删除</a>
+                    <a id="uploadGoodsImage" class="btn btn-primary bottom" role="button">上传商品图片</a>
                 </div>
             </div>
             <div class="row">
@@ -41,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <table id="goodsTable" style="cellspacing:0;width: 100%">
+                    <table id="goodsTable" class="table table-striped table-bordered" style="width: 100%">
 						<thead>
 							<tr>
 								<th width="5%">
@@ -51,9 +54,10 @@
 								<th width="10%">商品编码</th>
 								<th width="10%">商品类型名称</th>
 								<th width="10%">商品库存</th>
-								<th width="10%">商品进货价格</th>
-								<th width="10%">商品售出价格</th>
-								<th width="30%">商品描述</th>
+								<th width="10%">商品进货价</th>
+								<th width="10%">商品售出价</th>
+								<th width="20%">商品描述</th>
+								<th width="10%">是否上传图片</th>
 							</tr>
 						</thead>
 					</table>
@@ -124,6 +128,30 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" id="saveOrUpdate">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="imageInputModal" tabindex="-1" role="dialog" aria-labelledby="imageInputModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="imageInputModalLabel">商品编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="imageInputForm">
+                        <div class="form-group">
+                            <label for="goodsImage" class="col-sm-2 control-label">上传图片</label>
+                            <div class="col-sm-10">
+                    			<input type="file" name="goodsImage" id="goodsImage" class="file-loading" />
+                        	</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
                 </div>
             </div>
         </div>

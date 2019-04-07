@@ -13,8 +13,10 @@ import com.singlethreadzzz.dim.domain.GoodsPurchaseLog;
 import com.singlethreadzzz.dim.domain.GoodsSellLog;
 import com.singlethreadzzz.dim.domain.GoodsType;
 import com.singlethreadzzz.dim.domain.User;
+import com.singlethreadzzz.dim.exception.BeforeJsonException;
 import com.singlethreadzzz.dim.mapper.goodsManage.GoodsManageMapper;
 import com.singlethreadzzz.dim.mapper.salesManage.SalesManageMapper;
+import com.singlethreadzzz.dim.pojo.GoodsInfo;
 import com.singlethreadzzz.dim.service.salesManage.SalesManageService;
 import com.singlethreadzzz.dim.util.UUIDUtils;
 
@@ -24,6 +26,7 @@ public class SalesManageServiceImpl implements SalesManageService{
 	@Autowired
 	private SalesManageMapper salesManageMapper;
 	
+	@Autowired
 	private GoodsManageMapper goodsManageMapper;
 
 	@Override
@@ -35,7 +38,7 @@ public class SalesManageServiceImpl implements SalesManageService{
 	public void saveGoodsPurchaseLog(GoodsPurchaseLog goodsPurchaseLog) throws Exception {
 		Goods goods = this.goodsManageMapper.selectGoodsByGoodsId(goodsPurchaseLog.getGoodsId());
 		int oldGoodsStock = goods.getGoodsStock();
-		goods.setGoodsStock(oldGoodsStock - goodsPurchaseLog.getGoodsPurchaseQuantity());
+		goods.setGoodsStock(oldGoodsStock + goodsPurchaseLog.getGoodsPurchaseQuantity());
 		this.goodsManageMapper.updateGoods(goods);
 		User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
 		goodsPurchaseLog.setGoodsPurchaseLogId(UUIDUtils.getUUID());
@@ -49,6 +52,9 @@ public class SalesManageServiceImpl implements SalesManageService{
 	public void saveGoodsSellLog(GoodsSellLog goodsSellLog) throws Exception {
 		Goods goods = this.goodsManageMapper.selectGoodsByGoodsId(goodsSellLog.getGoodsId());
 		int oldGoodsStock = goods.getGoodsStock();
+		if(oldGoodsStock - goodsSellLog.getGoodsSellQuantity() < 0) {
+			throw new BeforeJsonException("售出数不可大于库存数");
+		}
 		goods.setGoodsStock(oldGoodsStock - goodsSellLog.getGoodsSellQuantity());
 		this.goodsManageMapper.updateGoods(goods);
 		User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
@@ -57,6 +63,11 @@ public class SalesManageServiceImpl implements SalesManageService{
 		goodsSellLog.setOperationTime(Timestamp.valueOf(LocalDateTime.now()));
 		goodsSellLog.setOperationUser(currentUser.getUserAccount());
 		this.salesManageMapper.insertGoodsSellLog(goodsSellLog);
+	}
+
+	@Override
+	public List<GoodsInfo> getFuzzyGoodsInfoByGoodsName(String goodsName) throws Exception {
+		return this.goodsManageMapper.selectFuzzyGoodsInfoByGoodsName(goodsName);
 	}
 
 }

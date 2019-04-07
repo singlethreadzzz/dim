@@ -134,5 +134,37 @@ public interface GoodsManageService {
 	 *</p>
 	 */
 	public GoodsInfo getGoodsInfoByGoodsId(String goodsId) throws Exception ;
+	
+	/**
+	 * <p>Method ：updateGoodsImageId
+	 * <p>Description : 修改商品图片信息
+	 *
+	 * @param goods
+	 * @throws Exception 
+	 * @author  単スレッド-singlethreadzzz@gmail.com
+	 *<p>
+	 *--------------------------------------------------------------<br>
+	 * 修改履历：<br>
+	 *        <li> 2019年3月27日，singlethreadzzz@gmail.com，创建方法；<br>
+	 *--------------------------------------------------------------<br>
+	 *</p>
+	 */
+	public void updateGoodsImageId(Goods goods) throws Exception ;
+	
+	/**
+	 * <p>Method ：deleteGoodsImageByGoodsId
+	 * <p>Description : 通过商品ID删除商品图片
+	 *
+	 * @param goodsId
+	 * @throws Exception 
+	 * @author  単スレッド-singlethreadzzz@gmail.com
+	 *<p>
+	 *--------------------------------------------------------------<br>
+	 * 修改履历：<br>
+	 *        <li> 2019年3月27日，singlethreadzzz@gmail.com，创建方法；<br>
+	 *--------------------------------------------------------------<br>
+	 *</p>
+	 */
+	public void deleteGoodsImageByGoodsId(List<String> goodsIdList, String path) throws Exception ;
 
 }
