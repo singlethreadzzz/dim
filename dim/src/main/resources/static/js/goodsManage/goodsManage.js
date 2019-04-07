@@ -15,7 +15,7 @@ $(function () {
 		//初始化商品新增或修改弹出模态框点击事件
 		fnInitSaveOrUpdateClick();
 		//初始化上传商品图片点击事件
-		fnInitUploadGoodsImageClick();		
+		fnInitUploadGoodsImageClick();
 	}
 	function fnInitGoodsTable(){
 		
@@ -372,11 +372,13 @@ $(function () {
 				$("#goodsImage").off('fileuploaded');
 				$("#goodsImage").off('filesuccessremove');
 				fnInitImageInput(goodsId);
+				fnInitGoodsImagePreview(goodsId);
 				$("#imageInputModal").modal();
 		});
 	}
 	
 	function fnInitImageInput(goodsId) {
+		
 		$("#goodsImage").fileinput({
 	        language: 'zh', //设置语言
 	        uploadUrl: path + "/goodsManage/goodsImageInput", //上传的地址
@@ -411,6 +413,7 @@ $(function () {
 	            toastr.error("图片上传失败，请重试");
 	            return;
 	        }
+	        fnInitGoodsImagePreview(goodsId);
 	        $("#goodsTable").DataTable().ajax.reload();
 	    });
 	    
@@ -423,6 +426,7 @@ $(function () {
 			      success: function (result) {
 			    	  if(result){
 			    		  if(result.code == 1){
+			    			  fnInitGoodsImagePreview(goodsId);
 			    			  $("#goodsTable").DataTable().ajax.reload();
 			    		  }else{
 			    			  toastr.error(result.message);
@@ -434,5 +438,34 @@ $(function () {
 				  }
 			  });
 	    });
+	}
+	
+	function fnInitGoodsImagePreview(goodsId) {
+		$.ajax({
+			  type: "GET",
+		      url: path + "/goodsManage/getGoodsInfoByGoodsId",
+		      dataType: "json",
+		      contentType: 'application/json',
+		      data: {
+		    	  goodsId: goodsId
+		      },
+		      success: function (result) {
+		    	  if(result){
+		    		  if(result.code == 1){
+		    			  var goodsPictureId = result.data.goodsPictureId;
+		    			  if(goodsPictureId == null || goodsPictureId == ""){
+		    				  $("#goodsImagePreview").attr("src",path + "/static/images/sample.png?"+Math.random());
+		    			  }else{
+		    				  $("#goodsImagePreview").attr("src",path + "/static/images/" + goodsPictureId + "?" + Math.random());
+		    			  }
+		    		  }else{
+		    			  toastr.error(result.message);
+		    		  }
+		    	  }
+			  },
+		      error: function (e) {
+		    	  toastr.error("查询商品失败，请联系管理员");
+			  }
+		  });
 	}
 });
