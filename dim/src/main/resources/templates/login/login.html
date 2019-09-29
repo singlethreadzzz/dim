@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="単スレッド <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系登录页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DIM库存管理系统</title>
+	<head th:replace="head"></head>
+
+	<link href="../static/css/login/login.css" th:href="@{/static/css/login/login.css}" rel="stylesheet"></link>
+	<script type="text/javascript" src="../static/js/login/login.js" th:src="@{/static/js/login/login.js}"></script>
+	
+	<head th:replace="inline"></head>
+</head>
+
+<body>
+	<div class="background">
+		<header>
+			<nav class="header navbar navbar-inverse">
+				<h1 class="text-muted">欢迎使用DIM库存管理系统</h1>
+			</nav>
+		</header>
+		<div id="mainContainer" class="container">
+			<div id="loginRow" class="row">
+				<div class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4 col-offset-1 col-sm-offset-1 col-md-offset-4 col-lg-offset-4 col-xl-offset-4">
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<h2 class="h3 mb-3 font-weight-normal">请登录</h2>
+						</div>
+						<div class="form-group">
+							<label for="account" class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 control-label">用户名</label>
+							<div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+								<input type="text" id="account" class="form-control"
+									placeholder="请输入用户名" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 control-label">密码</label>
+							<div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+								<input type="password" id="password" class="form-control"
+									placeholder="请输入用户密码" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="checkbox mb-3 col-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-xl-offset-2">
+								<label> <input type="checkbox" value="remember"
+									id="remember"> 记住我
+								</label> <span>不是自己的电脑上不要勾选此项</span>
+							</div>
+						</div>
+						<div class="form-group" style="display: none;" id="errorDiv">
+							<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+								<label id="errorLabel"></label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+								<a id="login" class="btn btn-lg btn-primary btn-block"
+									type="button">登录</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	<footer th:replace="footer"> </footer>
+	</div>
+</body>
+
+</html>

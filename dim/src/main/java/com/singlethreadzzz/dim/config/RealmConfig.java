@@ -82,16 +82,13 @@ public class RealmConfig {
         ShiroFilterFactoryBean adminShiroFilterFactoryBean = new ShiroFilterFactoryBean();
         adminShiroFilterFactoryBean.setSecurityManager(adminSecurityManager);
         LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();
-
         //登出
         map.put("/logout","logout");
         
         //无需认证的地址   
         map.put("/login","anon");
-        map.put("/static/css","anon");
-        map.put("/static/js","anon");
-        map.put("/static/image","anon");
-        
+        map.put("/static/**","anon");
+        map.put("/error","anon");
         //需要权限的地址
 //        map.put("/addUser","roles[admin]");
         

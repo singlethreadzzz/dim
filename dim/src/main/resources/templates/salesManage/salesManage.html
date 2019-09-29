@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="単スレッド <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系统销售管理页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DIM库存管理系统</title>
+	<head th:replace="head"></head>
+	
+    <script type="text/javascript" src="../static/js/salesManage/salesManage.js" th:src="@{/static/js/salesManage/salesManage.js}"></script>
+    <link href="../static/css/salesManage/salesManage.css" th:href="@{/static/css/salesManage/salesManage.css}" rel="stylesheet"></link>
+    
+    <head th:replace="inline"></head>
+</head>
+
+<body>
+	<header th:replace="header"></header>
+    <div id="mainContainer" class="container">
+        <div class="stockwarning" id="searchDiv">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h3 class="page-header">商品搜索</h3>
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-sm-4">
+                    <input type="text" class="form-control" id="searchGoodsName" placeholder="请输入商品名称">
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-primary" id="searchButton">查询</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <h3 class="page-header">销售管理</h3>
+                </div>
+            </div>
+        </div>
+        <div class="stockwarning" id="salesManage">
+        </div>
+    </div>
+	<footer th:replace="footer"> </footer>
+    <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="purchaseModalLabel">进货管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="purchaseForm">
+                        <div class="form-group" style="display: none;">
+                            <label for="goodsIdPurchase" class="col-sm-3 control-label">商品ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="goodsIdPurchase">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsNamePurchase" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编码</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsCodePurchase" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品类型名称</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsTypeNamePurchase" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品描述</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsDescribePurchase" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品库存</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsStockPurchase" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsPurchasePrice" class="col-sm-3 control-label">商品进货价</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="goodsPurchasePrice" placeholder="请输入商品进货价">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsPurchaseTime" class="col-sm-3 control-label">进货时间</label>
+                            <div class="col-sm-9">
+                                <input type="datetime-local" class="form-control" id="goodsPurchaseTime" value="" placeholder="请选择进货时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsPurchaseQuantity" class="col-sm-3 control-label">进货数</label>
+                            <div class="col-sm-9">                       
+                                <input id="goodsPurchaseQuantity" type="number" class="form-control" min=0 value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsPurchaseRemarks" class="col-sm-3 control-label">商品进货备注</label>
+                            <div class="col-sm-9">                       
+                                <textarea  rows="3" class="form-control" id="goodsPurchaseRemarks" placeholder="请输入商品进货备注"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;" id="errorDivPurchase">
+							<div class="col-sm-12 text-center">
+								<label id="errorLabelPurchase" style="color: red;"></label>
+							</div>
+						</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="goodsPurchase">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sellModal" tabindex="-1" role="dialog" aria-labelledby="sellModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="sellModalLabel">售出管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="sellForm">
+                        <div class="form-group" style="display: none;">
+                            <label for="goodsIdSell" class="col-sm-3 control-label">商品ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="goodsIdSell">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品名称</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsNameSell" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品编码</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsCodeSell" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品类型名称</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsTypeNameSell" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品描述</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsDescribeSell" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品库存</label>
+                            <div class="col-sm-9">
+                                <p id = "goodsStockSell" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsSellPrice" class="col-sm-3 control-label">商品售出价</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="goodsSellPrice" placeholder="请输入商品售出价">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsSellTime" class="col-sm-3 control-label">售出时间</label>
+                            <div class="col-sm-9">
+                                <input type="datetime-local" class="form-control" id="goodsSellTime" value="" placeholder="请选择售出时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsSellQuantity" class="col-sm-3 control-label">售出数</label>
+                            <div class="col-sm-9">                       
+                                <input id="goodsSellQuantity" type="number" class="form-control" min=0 value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsSellRemarks" class="col-sm-3 control-label">商品售出备注</label>
+                            <div class="col-sm-9">                       
+                                <textarea  rows="3" class="form-control" id="goodsSellRemarks" placeholder="请输入商品售出备注"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;" id="errorDivSell">
+							<div class="col-sm-12 text-center">
+								<label id="errorLabelSell" style="color: red;"></label>
+							</div>
+						</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="goodsSell">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

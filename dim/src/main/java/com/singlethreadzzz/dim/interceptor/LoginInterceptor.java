@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-@Component
+//@Component
 public class LoginInterceptor implements HandlerInterceptor {
 	
 	Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -26,18 +26,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 		logger.info("登录拦截器拦截成功");
 		HttpSession httpSession = request.getSession();
 		if(httpSession == null) {
-			response.sendRedirect("/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			logger.info("跳转到登录界面");
 	        return false;
 		}
-		Subject currentUser = SecurityUtils.getSubject();
-		if(currentUser.isAuthenticated()) {
+		Object userId = httpSession.getAttribute("userId");
+		if(userId != null) {
 			logger.info("用户已登录");
 			return true;
 		}else {
 			String redirectUrl = request.getRequestURI();
 			httpSession.setAttribute("redirect", redirectUrl);
-			response.sendRedirect("/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			logger.info("用户未登录，跳转到登录界面");
 	        return false;
 		}

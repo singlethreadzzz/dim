@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="単スレッド <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系统首页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DIM库存管理系统</title>
+	<head th:replace="head"></head>
+	
+    <script type="text/javascript" src="../static/js/index/index.js" th:src="@{/static/js/index/index.js}"></script>
+    
+	<head th:replace="inline"></head>
+</head>
+
+<body>
+	<header th:replace="header"></header>
+    <div id="mainContainer" class="container">
+    	<h1>欢迎使用DIM库存管理系统</h1>
+    </div>
+    <footer th:replace="footer"> </footer>
+</body>
+
+</html>

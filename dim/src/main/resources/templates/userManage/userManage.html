@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="author" content="単スレッド <singlethreadzzz@gmail.com>">
+    <meta name="description" content="DIM库存管理系统用户管理页">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DIM库存管理系统</title>
+	<head th:replace="head"></head>
+	
+	<head th:replace="dataTableHead"></head>
+	<link href="../static/css/userManage/userManage.css" th:href="@{/static/css/userManage/userManage.css}" rel="stylesheet"></link>
+    <script type="text/javascript" src="../static/js/userManage/userManage.js" th:src="@{/static/js/userManage/userManage.js}"></script>
+    
+	<head th:replace="inline"></head>
+</head>
+
+<body>
+	<header th:replace="header"></header>
+    <div id="mainContainer" class="container">
+        <div class="stockwarning">
+            <div class="row">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <h3 class="page-header">用户管理</h3>
+                    <a id="addUser" class="btn btn-primary" role="button">新增用户</a>
+                    <a id="updateUser" class="btn btn-primary bottom" role="button">修改用户</a>
+                    <a id="deleteUser" class="btn btn-primary bottom" role="button">删除用户</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h4 class="page-header">用户信息</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="userTable" class="table table-striped table-bordered" style="width: 100%">
+						<thead>
+							<tr>
+								<th width="10%" style="text-align:center;">
+									<input type="checkbox" class="checkall" />
+								</th>
+								<th width="30%">用户帐号</th>
+								<th width="30%">用户昵称</th>
+								<th width="30%" style="text-align:center;">用户角色</th>
+							</tr>
+						</thead>
+					</table>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer th:replace="footer"> </footer>
+    <div class="modal fade" id="userEdit" tabindex="-1" role="dialog" aria-labelledby="userModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="userModalLabel">用户管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form id = "userForm" class="form-horizontal">
+                        <div class="form-group" style="display: none;">
+                            <label for="userId" class="col-sm-2 control-label">用户ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="userId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userAccount" class="col-sm-2 control-label">用户帐号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="userAccount" placeholder="请输入用户帐号">
+                            </div>
+                        </div>
+                      	<div class="form-group">
+                            <label for="userName" class="col-sm-2 control-label">用户昵称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="userName" placeholder="请输入用户昵称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="userPassword" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="roleName" class="col-sm-2 control-label">角色</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="roleName"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;" id="errorDiv">
+							<div class="col-sm-12 text-center">
+								<label id="errorLabel" style="color: red;"></label>
+							</div>
+						</div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="saveOrUpdate" type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

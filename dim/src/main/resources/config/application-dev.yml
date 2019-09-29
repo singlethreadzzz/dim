@@ -7,44 +7,23 @@ logging:
     com.singlethreadzzz.dim: info
   file: logs/dim.log
 spring:
-#  messages:
-#    basename: i18n.messages
-#  servlet:
-#    multipart:
-#      enabled: true
-#      #设置单个文件的大小限制
-#      max-file-size: 100MB
-#      #设置单次请求的总大小限制
-#      max-request-size: 1000MB
-  resources:
-    static-locations: classpath:/static/image,classpath:/templates,classpath:/static/js,classpath:/static/css
+  servlet:    multipart:      max-file-size: 10MB
+      max-request-size: 100MB  resources:
+    static-locations: classpath:/static/
+    cache:      period: 0
   mvc: 
     static-path-pattern: /static/**
+    favicon:      enabled: false
   thymeleaf: 
     cache: false
+    suffix: .html
+    prefix: classpath:/templates/
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/dim?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/dim?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: dim
     password: dim
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
   banner:
     location: classpath:/static/banner/banner.txt
 mybatis:
   type-aliases-package: com.singlethreadzzz.dim.domain
-######################### Druid连接池的配置信息  #################
-#    druid:
-#    initialSize: 5                                 #初始化连接大小
-#    minIdle: 5                                     #最小连接池数量
-#    maxActive: 20                                  #最大连接池数量
-#    maxWait: 60000                                 #获取连接时最大等待时间，单位毫秒
-#    timeBetweenEvictionRunsMillis: 60000           #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-#    minEvictableIdleTimeMillis: 300000             #配置一个连接在池中最小生存的时间，单位是毫秒
-#    validationQuery: SELECT 1 FROM DUAL            #测试连接
-#    testWhileIdle: true                            #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
-#    testOnBorrow: false                            #获取连接时执行检测，建议关闭，影响性能
-#    testOnReturn: false                            #归还连接时执行检测，建议关闭，影响性能
-#    poolPreparedStatements: false                  #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
-#    maxPoolPreparedStatementPerConnectionSize: 20  #开启poolPreparedStatements后生效
-#    filters: stat,wall,log4j                       #配置扩展插件，常用的插件有=>stat:监控统计  log4j:日志  wall:防御sql注入
-#    connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000'  #通过connectProperties属性来打开mergeSql功能;慢SQL记录
